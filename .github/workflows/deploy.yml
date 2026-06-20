@@ -26,7 +26,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22 # Mis à jour pour Node 22 (plus de warnings)
           cache: 'npm'
 
       - name: Install dependencies
@@ -39,6 +39,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+          retention-days: 1 # Force le nettoyage pour éviter les doublons
 
       - name: Deploy to GitHub Pages
         id: deployment
