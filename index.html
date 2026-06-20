@@ -198,8 +198,23 @@
         .skill-grid-card .sk-name { font-size: .85rem; font-weight: 600; }
         .skill-grid-card .sk-desc { font-size: .72rem; color: var(--muted); }
 
-        /* ── Cartes Projets Épurées ── */
-        .projets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px,1fr)); gap: 2rem; }
+        .projets-grid {
+            display: grid;
+            /* ── FIXE À EXACTEMENT 2 COLONNES ÉGALES ── */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            align-items: start; /* Garde les hauteurs indépendantes lors du clic */
+        }
+
+        /* Optionnel : Sécurité pour les petits écrans (smartphones) */
+        @media (max-width: 768px) {
+            .projets-grid {
+                grid-template-columns: 1fr; /* Passe sur 1 seule colonne sur mobile */
+            }
+            .projet-card[style*="grid-column: span 2;"] {
+                grid-column: span 1 !important; /* Annule le span 2 sur mobile */
+            }
+        }
         .projet-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
         .projet-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
         .projet-cover { height: 180px; overflow: hidden; border-bottom: 1px solid var(--border); }
@@ -226,7 +241,7 @@
 
         /* ── Bloc Expérience Pro (Stage) ── */
         .stage-enterprise { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; display: flex; gap: 1.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; align-items: center; }
-        .stage-logo-box { width: 64px; height: 64px; border-radius: var(--radius-sm); background: var(--accent-purple); color: var(--accent-purple-d); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+        .stage-logo-box { width: 64px; height: 64px; border-radius: var(--radius-sm); background: var(--bg-alt); color: var(--accent-purple-d); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
         .stage-info h3 { font-size: 1.25rem; letter-spacing: -0.3px; }
         .stage-period { font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: .25rem; }
         .missions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 1.5rem; }
@@ -375,10 +390,10 @@
 
 <!-- ═══════════════════ ACCUEIL ═══════════════════ -->
 <section id="hero">
-    <img id="imagePaysage" src="src/assets/images/paysage.png" alt="">
+    <img id="imagePaysage" src="src/assets/images/paysage.png" alt="Paysage de fond">
     <div class="hero-inner">
         <div class="hero-photo-wrap">
-            <img src="src/assets/images/IMG_5667.jpg" alt="" />
+            <img src="src/assets/images/IMG_5667.jpg" alt="Photo de Kenzo Lierley" />
         </div>
         <div class="hero-text">
             <div class="hero-badge">
@@ -387,7 +402,7 @@
             <h1>Salut, je suis <em>Kenzo</em></h1>
             <p class="hero-sub">Développeur Informatique · Étudiant en BUT</p>
             <div class="hero-intro">
-                Bienvenue sur mon portfolio. Actuellement en cours de validation de ma 2e année de BUT Informatique, j'ai conçu cet espace pour vous présenter mes réalisations majeures et mon suivi de compétences. En vue de ma rentrée en <strong>BUT3 (Rentrée 2026)</strong> dans le parcours <strong>Réalisation d’Applications</strong>, je recherche activement une alternance d’un an pour mettre ma rigueur et mes compétences au service de vos projets.
+                Bienvenue sur mon portfolio. Actuellement en cours de validation de ma 2e année de BUT Informatique, j'ai conçu cet espace pour présenter mes réalisations majeures et mon suivi de compétences. En vue de ma rentrée en <strong>BUT3 (Rentrée 2026)</strong> dans le parcours <strong>Réalisation d’Applications</strong>, je recherche activement une alternance d’un an pour mettre ma rigueur et mes compétences au service de vos projets.
             </div>
             <div class="hero-cta">
                 <a href="#about" class="btn-p">Consulter mon profil</a>
@@ -401,75 +416,81 @@
 <div class="section-wrap alt" id="about">
     <div class="inner">
         <div class="section-label">Profil</div>
-        <h2 class="section-title">Présentation</h2>
-        <p class="section-sub">Toutes les informations clés sur mon parcours académique et mes objectifs.</p>
+        <h2 class="section-title">Présentation Professionnelle</h2>
+        <p class="section-sub">Développeur informatique en formation, spécialisé dans la réalisation d'applications web et logicielles fiables.</p>
+
+        <div class="about-card" style="margin-bottom: 2.5rem;">
+            <h3><i class="fa-solid fa-user-tie" style="color:var(--accent-purple-d)"></i> Profil</h3>
+            <p style="font-size: 0.95rem; color: var(--text); line-height: 1.7;">
+                Futur étudiant en 3e année de BUT Informatique (Parcours <strong>Réalisation d'Applications</strong>), je centre mon approche sur la conception d'architectures logicielles structurées et performantes. Fort d'une expérience de <a href="#stage" style="color: var(--accent-purple-d); cursor: pointer;">stage en autonomie complète sur la refonte globale du site "À la découverte des professions"</a> (PHP 8 / Symfony 8 / Tailwind CSS / Twig), j'allie rigueur et technique. Je sais m'adapter rapidement aux exigences de production d'une équipe technique.
+            </p>
+        </div>
 
         <div class="about-grid">
-            <!-- Profil principal -->
             <div class="about-profile-card">
-                <div class="profile-avatar"><img id="imageProfil" src="src/assets/images/IMG_5667.jpg" alt="" /></div>
+                <div class="profile-avatar"><img id="imageProfil" src="src/assets/images/IMG_5667.jpg" alt="Photo de Kenzo LIERLEY" /></div>
                 <div class="profile-name">Kenzo LIERLEY</div>
-                <span class="profile-role">Développeur - Étudiant BUT</span>
+                <span class="profile-role">Développement Web &amp; Logiciel</span>
 
                 <div class="profile-links">
-                    <h3>Les liens utiles</h3>
+                    <h3 style="font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted);">Liens professionnels</h3>
                     <a href="https://www.linkedin.com/in/kenzo-lierley-31b839321" target="_blank" class="profile-link"><i class="fa-brands fa-linkedin" style="color:#0077B5"></i> LinkedIn</a>
                     <a href="https://github.com/LierleyKenzo" target="_blank" class="profile-link"><i class="fa-brands fa-github"></i> GitHub</a>
-                    <a download="" href="src/assets/files/CV_KenzoLierley.pdf" class="profile-link"><i class="fa-solid fa-file" style="color:var(--accent-orange-d)"></i> Mon CV</a>
+                    <a download="" href="src/assets/files/CV_KenzoLierley.pdf" class="profile-link"><i class="fa-solid fa-file" style="color:var(--accent-orange-d)"></i> Consulter mon CV</a>
                 </div>
             </div>
 
             <div class="about-right">
                 <div class="about-cards-row">
-                    <!-- Mon parcours -->
                     <div class="about-card">
                         <h3><i class="fa-solid fa-graduation-cap" style="color:var(--accent-purple-d)"></i> Formations</h3>
                         <div class="parcours-list">
                             <div class="parcours-item">
-                                <div class="parcours-icon"><img id="logoIUT" src="src/assets/images/logoIUT.png" alt=""></div>
+                                <div class="parcours-icon"><img id="logoIUT" src="src/assets/images/logoIUT.png" alt="Logo IUT"></div>
                                 <div>
                                     <strong>BUT Informatique — IUT Lyon 1</strong>
-                                    2024 → 2026 · Parcours réalisation d'application (2ème année)
+                                    2024 → 2027 · Parcours Réalisation d'Applications.
                                 </div>
                             </div>
                             <div class="parcours-item">
                                 <div class="parcours-icon"><i class="fa-solid fa-school"></i></div>
                                 <div>
                                     <strong>Baccalauréat Général</strong>
-                                    Diplômé en 2024 · Spécialités Mathématiques &amp; NSI.
+                                    Diplômé en 2024 · Spécialités Mathématiques et NSI.
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Ce que je recherche -->
                     <div class="about-card">
-                        <h3><i class="fa-solid fa-search" style="color:var(--accent-green-d)"></i> Ce que je recherche</h3>
+                        <h3><i class="fa-solid fa-search" style="color:var(--accent-green-d)"></i> Objectif Alternance</h3>
                         <div class="recherche-list">
-                            <div class="recherche-item"><i class="fa-solid fa-handshake" style="color:var(--accent-green-d)"></i> Alternance d'un an (BUT3)</div>
-                            <div class="recherche-item"><i class="fa-solid fa-calendar-days" style="color:var(--accent-green-d)"></i> Rentrée d'Automne 2026</div>
-                            <div class="recherche-item"><i class="fa-solid fa-briefcase" style="color:var(--accent-green-d)"></i> Développement logiciel/web</div>
+                            <div class="recherche-item"><i class="fa-solid fa-handshake" style="color:var(--accent-green-d)"></i> Contrat d'apprentissage (1 an)</div>
+                            <div class="recherche-item"><i class="fa-solid fa-calendar-days" style="color:var(--accent-green-d)"></i> Rentrée : Septembre / Automne 2026</div>
+                            <div class="recherche-item"><i class="fa-solid fa-code" style="color:var(--accent-green-d)"></i> Missions : Full-stack, Mobile ou Logiciel</div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Domaines d'intérêt professionnels & Pratiques cibles -->
                 <div class="about-card">
-                    <h3><i class="fa-solid fa-code-branch" style="color:var(--accent-purple-d)"></i> Ma ligne de conduite</h3>
+                    <h3><i class="fa-solid fa-star" style="color:var(--accent-yellow-d)"></i> Domaines d'Intérêt &amp; Approche</h3>
                     <div class="recherche-list">
                         <div class="recherche-item">
-                            <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent-purple-d)"></i>
-                            <span><strong>Code propre &amp; maintenable :</strong> Priorité à la lisibilité et au respect des conventions (SOLID, Clean Code).</span>
+                            <i class="fa-solid fa-comments" style="color:var(--accent-purple-d)"></i>
+                            <span><strong>Communication &amp; Sur-mesure :</strong> À l'écoute des besoins des utilisateurs finaux pour concevoir des parcours applicatifs fluides et des solutions adaptées aux réalités métiers.</span>
                         </div>
                         <div class="recherche-item">
-                            <i class="fa-solid fa-book-open" style="color:var(--accent-blue-d)"></i>
-                            <span><strong>Apprentissage continu :</strong> Curieux de nature, j'aime comprendre le "pourquoi" derrière chaque outil.</span>
+                            <i class="fa-solid fa-code-commit" style="color:var(--accent-blue-d)"></i>
+                            <span><strong>Rigueur &amp; Bonnes pratiques :</strong> Sensibilisé aux standards du secteur, j'attache de l'importance à la production d'un code propre, documenté, évolutif et au respect des architectures logicielles.</span>
                         </div>
                         <div class="recherche-item">
-                            <i class="fa-solid fa-list-check" style="color:var(--accent-green-d)"></i>
-                            <span><strong>Gestion de projet &amp; Agilité :</strong> Habitué au flux de travail collaboratif et adepte d'une communication transparente lors des échanges d'équipe.</span>
+                            <i class="fa-solid fa-users-gear" style="color:var(--accent-green-d)"></i>
+                            <span><strong>Synergie &amp; Travail en équipe :</strong> Adepte du partage de connaissances, d'une communication claire et de flux de travail collaboratifs structurés.</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -503,12 +524,12 @@
 <div class="section-wrap alt" id="projets">
     <div class="inner">
         <div class="section-label">Projets</div>
-        <h2 class="section-title">Projets BUT (SAÉ)</h2>
-        <p class="section-sub">Projets de groupe mettant en œuvre les compétences travaillés au sein de la formation.</p>
+        <h2 class="section-title">Réalisations &amp; Compétences</h2>
+        <p class="section-sub">Démonstration concrète de mes compétences à travers mes réalisations académiques clés en BUT Informatique.</p>
 
         <div class="projets-grid">
 
-            <!-- SAE 1 -->
+            <!-- ================== SAÉ S1 (SYNTHÉTIQUE) ================== -->
             <div class="projet-card">
                 <div class="projet-cover">
                     <img src="src/assets/images/saeS1.png" alt="Console" />
@@ -519,9 +540,9 @@
                         <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S1</span>
                     </div>
                     <h3 class="projet-title">Traitement Algorithmique CSV</h3>
-                    <p class="projet-desc">Conception d'un utilitaire en ligne de commande pour le tri et le filtrage performant de données volumineuses.</p>
+                    <p class="projet-desc">Conception d'un utilitaire de gestion de données clients en ligne de commande dédié au tri et au filtrage performant de gros volumes de données.</p>
                     <div class="projet-role">
-                        <strong>Contexte :</strong> Manipulation de structures de données en mémoire vive et optimisation du temps d'exécution.
+                        <strong>Mon rôle :</strong> En charge du développement des algorithmes de tri, des fonctions d'ouverture et de lecture des fichiers CSV, ainsi que de la co-écriture des filtres de données.
                     </div>
                     <div class="projet-techs">
                         <span class="interest-chip">C</span>
@@ -532,26 +553,27 @@
                     </button>
                 </div>
                 <div class="projet-expanded">
-                    <div class="exp-section-title">Réalisations Clés</div>
+                    <div class="exp-section-title">Réalisations</div>
                     <ul>
-                        <li>Algorithmes de tri optimisés sans bibliothèque externe</li>
-                        <li>Gestion de l'allocation dynamique et des pointeurs</li>
-                        <li>Écriture de scripts de tests automatisés en Bash</li>
+                        <li>Implémentation d'algorithmes de tri optimisés sans bibliothèque externe (utilisation de pointeurs et tableaux dynamiques).</li>
                     </ul>
-                    <div class="exp-section-title">Analyse rétrospective</div>
-                    <p>La dépendance à l'environnement d'exécution local initial complique sa portabilité actuelle. Cela m'a poussé à étudier l'importance de la conteneurisation (Docker) pour mes futurs projets.</p>
-                    <div class="exp-section-title">Compétences ciblées</div>
-                    <div class="comp-badges">
-                        <span class="comp-badge">Optimiser</span>
-                        <span class="comp-badge">Réaliser</span>
-                    </div>
+                    <div class="exp-section-title">Démonstration des Compétences</div>
+                    <p>
+                        Ce projet valide ma capacité à <strong>Optimiser</strong> et <strong>Réaliser</strong> une application bas-niveau : l'absence d'outils de haut niveau m'a contraint à gérer rigoureusement l'allocation et la libération des ressources matérielles.
+                    </p>
+                    <div class="exp-section-title">Niveau de Maîtrise &amp; Évolution</div>
+                    <p style="font-size: 0.9rem; color: var(--text);">
+                        <strong>Bilan sur ces compétences :</strong> Concernant l'<em>Optimisation</em>, j'ai acquis une solide méthode sur la gestion de la mémoire vive en C. Côté <em>Réalisation</em>, je maîtrise désormais l'écriture de scripts de tests automatisés pour valider un livrable.
+                        <br><br>
+                        <strong>Axe de progression :</strong> Pour parfaire la <em>Réalisation</em>, je dois surmonter la dépendance stricte à l'environnement d'exécution local qui limitait la portabilité de l'outil, en intégrant par exemple des solutions de conteneurisation (Docker).
+                    </p>
                 </div>
             </div>
 
-            <!-- SAE 2 -->
+            <!-- ================== SAÉ S2 (SYNTHÉTIQUE) ================== -->
             <div class="projet-card">
                 <div class="projet-cover">
-                    <img src="src/assets/images/saeS2.png" alt="" />
+                    <img src="src/assets/images/saeS2.png" alt="Interface Graphique" />
                 </div>
                 <div class="projet-body">
                     <div class="projet-tags">
@@ -559,9 +581,9 @@
                         <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S2</span>
                     </div>
                     <h3 class="projet-title">Calculateur d'Itinéraires Urbains</h3>
-                    <p class="projet-desc">Application déterminant les chemins optimaux en utilisant différents algorithmes de parcours de graphe.</p>
+                    <p class="projet-desc">Application déterminant les chemins optimaux au sein d'un réseau de transport en utilisant la théorie des graphes.</p>
                     <div class="projet-role">
-                        <strong>Contexte :</strong> Implémentation d'algorithmes de graphes et conception d'une interface utilisateur fluide en Java/JavaSwing.
+                        <strong>Mon rôle :</strong> Responsable du développement de l'interface graphique fonctionnelle et participation à l'implémentation des algorithmes de parcours de graphes.
                     </div>
                     <div class="projet-techs">
                         <span class="interest-chip">Java</span>
@@ -572,56 +594,98 @@
                     </button>
                 </div>
                 <div class="projet-expanded">
-                    <div class="exp-section-title">Réalisations Clés</div>
+                    <div class="exp-section-title">Réalisations</div>
                     <ul>
-                        <li>Modélisation de réseaux sous forme de graphes mathématiques</li>
-                        <li>Calcul de trajectoires en temps réel</li>
-                        <li>Gestion asynchrone des actions de l'utilisateur sur l'interface</li>
+                        <li>Modélisation de structures de données interconnectées (Graphes mathématiques avec nœuds et arêtes).</li>
                     </ul>
-                    <div class="exp-section-title">Compétences ciblées</div>
-                    <div class="comp-badges">
-                        <span class="comp-badge">Optimiser</span>
-                        <span class="comp-badge">Réaliser</span>
-                    </div>
+                    <div class="exp-section-title">Démonstration des Compétences</div>
+                    <p>
+                        Ce travail illustre les compétences <strong>Réaliser</strong> et <strong>Optimiser</strong> : l'application calcule les trajectoires de manière réactive sur l'IHM grâce à une gestion asynchrone des actions utilisateurs, évitant le gel de la fenêtre.
+                    </p>
+                    <div class="exp-section-title">Niveau de Maîtrise &amp; Évolution</div>
+                    <p style="font-size: 0.9rem; color: var(--text);">
+                        <strong>Ce que j'ai appris :</strong> La mise en œuvre de l'<em>Optimisation</em> m'a apporté une maîtrise pratique des structures algorithmiques non-linéaires (graphes). Pour la <em>Réalisation</em>, j'ai appris à concevoir des interfaces graphiques événementielles fluides.
+                        <br><br>
+                        <strong>Axe de progression :</strong> Concernant la <em>Réalisation</em>, mon objectif est d'approfondir le découplage strict entre l'affichage et les données en migrant vers des architectures industrielles de type MVC ou MVVM.
+                    </p>
                 </div>
             </div>
 
-            <!-- SAE 3 -->
-            <div class="projet-card">
-                <div class="projet-cover">
-                    <img src="src/assets/images/catzmess.png" alt="Réseau" />
+            <!-- ================== SAÉ S3-S4 (MAJEURE - OCCUPE 2 COLONNES) ================== -->
+            <div class="projet-card" style="grid-column: span 2;">
+                <div class="projet-cover" style="height: 300px;">
+                    <img src="src/assets/images/catzmess.png" alt="Catzmess Réseau" style="object-position: center;" />
                 </div>
-                <div class="projet-body">
-                    <div class="projet-tags">
-                        <span class="tag" style="background:var(--accent-pink); color:var(--accent-pink-d)">Réseau &amp; Système</span>
-                        <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S3-S4</span>
+                <div class="projet-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="projet-tags">
+                            <span class="tag" style="background:var(--accent-pink); color:var(--accent-pink-d)">Réseau &amp; Système</span>
+                            <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ Majeure S3-S4</span>
+                        </div>
+                        <h3 class="projet-title" style="font-size: 1.5rem; margin: 0.5rem 0;">Catzmess — Jeu de plateforme Multijoueur</h3>
+                        <p class="projet-desc">Architecture logicielle complète d'un jeu de plateforme multijoueur synchrone en ligne, impliquant le développement d'un serveur dédié et la gestion des états de connexion en temps réel.</p>
                     </div>
-                    <h3 class="projet-title">Catzmess — Jeu Réseau Multijoueur</h3>
-                    <p class="projet-desc">Jeu de plateforme multijoueur en ligne impliquant la mise en place d'un serveur de jeu et d'une base de données.</p>
-                    <div class="projet-role">
-                        <strong>Contexte :</strong> Projet annuel axé sur la programmation système et l'administration réseau d'un serveur dédié.
+                    <div>
+                        <div class="projet-role" style="margin-top: 0;">
+                            <strong>Mon rôle au sein de l'équipe :</strong> Responsable du serveur, du réseau et de la base de données. J'ai conçu le schéma relationnel, écrit les scripts de requêtes entre MariaDB et C++, créé le site web de téléchargement et pris en charge la sécurité des flux de données.
+                        </div>
+                        <div class="projet-techs" style="margin-top: 1rem;">
+                            <span class="interest-chip">C++</span>
+                            <span class="interest-chip">SQL</span>
+                            <span class="interest-chip">Linux</span>
+                            <span class="interest-chip">MariaDB</span>
+                            <span class="interest-chip">PHP</span>
+                            <span class="interest-chip">Apache</span>
+                        </div>
+                        <button class="btn-more" onclick="toggleProjet(this)" style="margin-top: 1.5rem; width: 100%;">
+                            <i class="fa-solid fa-plus"></i> Déployer la présentation majeure &amp; visionner le Trailer
+                        </button>
                     </div>
-                    <div class="projet-techs">
-                        <span class="interest-chip">C++</span>
-                        <span class="interest-chip">SQL</span>
-                        <span class="interest-chip">Réseau</span>
-                    </div>
-                    <button class="btn-more" onclick="toggleProjet(this)">
-                        <i class="fa-solid fa-plus"></i> Détails du projet
-                    </button>
                 </div>
-                <div class="projet-expanded">
-                    <div class="exp-section-title">Réalisations Clés</div>
-                    <ul>
-                        <li>Gestion de la communication réseau par Sockets (C++/Json)</li>
-                        <li>Conception et interconnexion d'une base de données relationnelle</li>
-                        <li>Configuration matérielle d'un serveur Linux (ordinateur personnel) pour héberger le backend (sur un réseau personnel)</li>
-                    </ul>
-                    <div class="exp-section-title">Compétences ciblées</div>
-                    <div class="comp-badges">
-                        <span class="comp-badge">Administrer</span>
-                        <span class="comp-badge">Collaborer</span>
-                        <span class="comp-badge">Réaliser</span>
+
+                <!-- Section dépliante majeure -->
+                <div class="projet-expanded" style="border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;">
+
+                        <!-- Colonne Gauche : Contenu et Compétences -->
+                        <div>
+                            <div class="exp-section-title">Réalisations d'Envergure</div>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">
+                                Ce projet annuel a demandé une coordination technique suivie. Nous avons construit un serveur capable de traiter les paquets réseau des joueurs et de diffuser les changements de position en continu. L'intégralité du code a été développée de zéro.
+                            </p>
+                            <ul>
+                                <li>Développement de la couche réseau en C++ en utilisant le format JSON pour structurer la communication.</li>
+                                <li>Conception de la base de données SQL pour assurer la persistance des profils, des scores et des niveaux personnalisés créés par les utilisateurs.</li>
+                            </ul>
+
+                            <div class="exp-section-title">Compétences Associées</div>
+                            <p style="font-size: 0.95rem; line-height: 1.6;">
+                                Ce projet démontre ma capacité à <strong>Administrer</strong>, <strong>Réaliser</strong> et <strong>Collaborer</strong> :
+                                <br>• <em>Administrer :</em> Configuration complète d'un environnement Linux (sur machine reconditionnée) faisant office de serveur dédié local pour le backend.
+                                <br>• <em>Collaborer &amp; Réaliser :</em> L'intégration réseau a nécessité des échanges réguliers et un suivi par tickets précis avec mes équipiers chargés du moteur physique et du rendu graphique.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="exp-section-title">Trailer du Projet</div>
+                            <div class="video-container" id="trailerContainer" style="background: #111; border-radius: 8px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; border: 1px solid var(--border); overflow: hidden; position: relative; cursor: pointer;" onclick="loadTrailer()">
+
+                                <div id="trailerPreview" style="text-align: center; z-index: 2;">
+                                    <i class="fa-solid fa-circle-play" style="font-size: 3rem; color: var(--bg-alt); margin-bottom: 0.5rem; transition: transform 0.2s;"></i>
+                                </div>
+
+                                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('src/assets/images/catzmess.png') center/cover no-repeat; opacity: 0.3; z-index: 1;"></div>
+                            </div>
+
+                            <div class="exp-section-title">Évolution</div>
+                            <p style="font-size: 0.9rem; color: var(--text);">
+                                <strong>Ce que j'ai appris :</strong> Sur le plan de l'<em>Administration</em> et de la <em>Réalisation</em>, j'ai développé une solide compréhension de la gestion de la latence réseau et des architectures client-serveur. Côté <em>Collaboration</em>, j'ai mesuré l'importance du travail de groupe et de la communication afin de gérer les différents conflits ou incompréhensions.
+                                <br><br>
+                                <br>• En <em>Optimisation</em>, nous avons été confrontés à des problèmes majeurs de latence réseau que nous avons peiné à résoudre. Mon objectif est d'apprendre à profiler un code serveur pour cibler précisément les goulots d'étranglement logicielles.
+                                <br>• En <em>Réalisation</em>, la charge de travail a été excessive car nous avons réinventé des briques techniques complexes qui existaient déjà sur le marché. J'ai compris que savoir mener un projet à terme, c'est aussi savoir évaluer quand utiliser une bibliothèque existante plutôt que de tout recoder de zéro.
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -630,201 +694,308 @@
     </div>
 </div>
 
-<!-- ═══════════════════ EXPERIENCE DE STAGE ═══════════════════ -->
 <div class="section-wrap" id="stage">
     <div class="inner">
-        <div class="section-label">Professionnel</div>
-        <h2 class="section-title">Expérience en Stage</h2>
-        <p class="section-sub">Bilan de mes 12 semaines de stage dédiées au développement applicatif et à la gestion de données.</p>
+        <div class="section-label">Expérience Professionnelle</div>
+        <h2 class="section-title">Stage BUT 2 — Développeur Web</h2>
+        <p class="section-sub">12 semaines de développement en autonomie complète au sein de l'association « À la découverte des professions » — Refonte intégrale d'une plateforme Symfony.</p>
 
         <div class="stage-enterprise">
-            <div class="stage-logo-box"><i class="fa-solid fa-laptop-code"></i></div>
-            <div class="stage-info">
-                <h3>Développement Back-End &amp; Optimisation — Milieu Associatif</h3>
-                <div class="stage-period"><i class="fa-regular fa-calendar"></i> Stage de 10 semaines · Mission d'évolution et mise en conformité informatique</div>
-                <p>Intervention sur la refonte globale de l'application, l'optimisation des performances serveurs et la mise en conformité des flux d'informations.</p>
+            <div class="stage-logo-box">
+                <img src="src/assets/images/logo-RI.png" alt="">
+            </div>
+            <div class="stage-info" style="flex:1;">
+                <div class="stage-period"><i class="fa-regular fa-calendar"></i>&nbsp; 07 avril → 26 juin 2026 · 12 semaines · Lyon</div>
+                <h3 style="margin:.3rem 0 .6rem;">À la découverte des professions <span style="font-size:.85rem;font-weight:500;color:var(--muted);">— Association Rotary, 33 Cours Albert Thomas, 69003 Lyon</span></h3>
+                <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:.8rem;">
+                    Association fondée en 1969 par le Rotary Club de Lyon regroupant <strong>21 clubs Rotary</strong> de la métropole. Elle organise chaque année une journée d'orientation réunissant <strong>plus de 2 000 jeunes</strong>, 180 intervenants professionnels et 60 ateliers thématiques. Hébergé dans les locaux de l'entreprise <em>Onyl Rocks</em> (entreprise du maître de stage), j'ai travaillé en <strong>totale autonomie</strong> sous la supervision d'Alexis MONNET, CTO et Lead Developer PHP/Symfony.
+                </p>
+                <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+                    <a href="https://www.decouvertedesprofessions.com/" target="_blank" class="profile-link" style="width:auto;padding:.4rem .9rem; cursor: pointer;">
+                        <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--accent-purple-d)"></i> Site de l'association
+                    </a>
+                    <span class="profile-link" style="width:auto;padding:.4rem .9rem;cursor:default;">
+                        <i class="fa-solid fa-user-tie" style="color:var(--accent-blue-d)"></i> Maître de stage : Alexis MONNET
+                    </span>
+                    <span class="profile-link" style="width:auto;padding:.4rem .9rem;cursor:default;">
+                        <i class="fa-solid fa-chalkboard-user" style="color:var(--accent-green-d)"></i> Tuteur IUT : Xavier MERRHEIM
+                    </span>
+                </div>
             </div>
         </div>
 
-        <div class="missions-grid">
-            <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-blue); color:var(--accent-blue-d)"><i class="fa-solid fa-globe"></i></div>
-                <div class="mission-body">
-                    <h4>M1 — Catalogue Applicatif</h4>
-                    <p>Modernisation de l'interface d'inscription et filtres dynamiques en JavaScript pour une fluidité accrue.</p>
+        <div class="about-card" style="margin-bottom:1.5rem;">
+            <h3 style="font-size:1rem;margin-bottom:.8rem;">Contexte du projet &amp; enjeux</h3>
+            <p style="font-size:.88rem;color:var(--muted);line-height:1.7;">
+                L'association souffrait d'un <strong>fort fractionnement de ses données</strong> : inscriptions sur un site obsolète, logistique via des fichiers Excel, mailings lancés manuellement en ligne de commande sur le serveur. Mon objectif était de remplacer l'ensemble de ces outils par <strong>une plateforme unique et centralisée</strong> construite en PHP 8 / Symfony 8 / Tailwind CSS / Twig. J'ai été le seul développeur sur le projet, avec une gestion autonome de toutes les phases — analyse, conception, développement, optimisation — et une communication quotidienne avec le maître de stage (rapports écrits sur Teams, réunions de suivi avec les bénévoles de l'association).
+            </p>
+        </div>
+
+        <div class="about-card" style="margin-bottom:2rem;">
+            <h3 style="font-size:1rem;margin-bottom:1rem;">Interface et plateforme avant le projet de refonte</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
+                <div style="text-align:center;">
+                    <img src="src/assets/images/accueilExistant.png" alt="Ancienne page d'accueil" style="width:100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
+                    <p style="font-size:.8rem; color:var(--muted); margin-top:.4rem;">Ancienne interface de la page d'accueil</p>
+                </div>
+                <div style="text-align:center;">
+                    <img src="src/assets/images/catalogueExistant.png" alt="Ancien catalogue d'ateliers" style="width:100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
+                    <p style="font-size:.8rem; color:var(--muted); margin-top:.4rem;">Ancienne structure textuelle du catalogue d'ateliers</p>
                 </div>
             </div>
+        </div>
+
+        <h3 style="font-size:1.1rem;margin-bottom:1.2rem;">Missions réalisées</h3>
+        <div class="missions-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2.5rem;">
+
             <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-orange); color:var(--accent-orange-d)"><i class="fa-solid fa-gears"></i></div>
+                <div class="mission-img" style="background:var(--accent-purple);font-size:1.4rem;color:var(--accent-purple-d);height:90px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-sitemap"></i></div>
                 <div class="mission-body">
-                    <h4>M2 — Performance &amp; Back-Office</h4>
-                    <p>Résolution des surcharges mémoire du serveur via l'optimisation des jointures de l'ORM Doctrine pour plus de 3 000 usagers.</p>
+                    <h4>Analyse du besoin &amp; conception</h4>
+                    <p>Immersion dans les processus métiers de l'association, participation aux réunions, rédaction des spécifications fonctionnelles et structuration des tâches en <strong>5 piliers</strong> (Admin, Étudiant, Intervenant, Établissement, Global) via Notion. Priorisation MoSCoW avec le maître de stage, puis diagramme de Gantt prévisionnel.</p>
                 </div>
             </div>
+
             <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-yellow); color:var(--accent-yellow-d)"><i class="fa-solid fa-bolt"></i></div>
+                <div class="mission-img" style="background:var(--accent-blue);font-size:1.4rem;color:var(--accent-blue-d);height:90px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-database"></i></div>
                 <div class="mission-body">
-                    <h4>M3 — Tâches Asynchrones</h4>
-                    <p>Mise en place d'un système de file d'attente avec Symfony Messenger pour l'envoi de notifications par e-mail en arrière-plan.</p>
+                    <h4>Modélisation &amp; base de données</h4>
+                    <p>Conception du schéma relationnel global (ORM Doctrine / MySQL) supportant <strong>+3 000 étudiants</strong>, 180 intervenants, 60 ateliers et une trentaine de bénévoles. Tables de liaison pour gérer les droits d'accès par rôle strict. Maquettes UI réalisées avec l'IA Stitch en Mobile First.</p>
                 </div>
             </div>
+
             <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-pink); color:var(--accent-pink-d)"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="mission-body">
-                    <h4>M4 — RGPD &amp; Business Intelligence</h4>
-                    <p>Sécurisation et anonymisation des données sensibles, couplées à la création de rapports décisionnels sous PowerBI.</p>
+                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                    <img src="src/assets/images/catalogue.png" alt="Catalogue et Inscriptions" style="width:100%; height:100%; object-fit:contain;">
                 </div>
+                <div class="mission-body">
+                    <h4>Catalogue des ateliers &amp; inscriptions</h4>
+                    <p>Développement d'un catalogue interactif de <strong>100+ ateliers</strong> avec filtres dynamiques JavaScript par secteur, niveau et horaire. Tunnel d'inscription sécurisé pour les élèves (3ème → post-bac) : création de compte, choix des ateliers, protection contre les attaques par énumération sur le formulaire "Mot de passe oublié".</p>
+                </div>
+            </div>
+
+            <div class="mission-card">
+                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                    <img src="src/assets/images/crud.png" alt="Espace d'administration" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <div class="mission-body">
+                    <h4>Espace d'administration &amp; CRUD</h4>
+                    <p>Tableau de bord complet de gestion de toutes les entités (étudiants, intervenants, lycées, clubs Rotary, encadrants…). Face aux problèmes de saturation mémoire sur 3 000+ lignes, mise en place d'une <strong>pagination stricte et de requêtes Doctrine ciblées</strong> réduisant drastiquement la consommation de ressources.</p>
+                </div>
+            </div>
+
+            <div class="mission-card">
+                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                    <img src="src/assets/images/repartition.png" alt="Algorithme de répartition" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <div class="mission-body">
+                    <h4>Algorithme de répartition logistique</h4>
+                    <p>Conception d'une interface et d'algorithmes pour affecter automatiquement les <strong>180 intervenants dans 60 ateliers</strong> et répartir les ateliers dans les salles selon la jauge d'inscrits. Vision d'ensemble avec indicateurs de remplissage par créneau et lancement de la répartition en un clic.</p>
+                </div>
+            </div>
+
+            <div class="mission-card">
+                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                    <img src="src/assets/images/email.png" alt="Système de messagerie" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <div class="mission-body">
+                    <h4>Système d'e-mails &amp; statistiques</h4>
+                    <p>Intégration de <strong>Symfony Messenger</strong> pour l'envoi asynchrone de mails groupés (2 000+ destinataires sans blocage de l'interface). Templates d'e-mails personnalisables avec variables dynamiques (nom, prénom, planning…). Module de statistiques générant des <strong>graphiques en temps réel</strong> depuis les questionnaires — conformité RGPD garantie (données hébergées en interne).</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+            <div class="about-card">
+                <h3 style="font-size:.95rem;margin-bottom:.8rem;"><i class="fa-solid fa-star" style="color:var(--accent-yellow-d)"></i> Points forts identifiés</h3>
+                <div class="recherche-list">
+                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Autonomie complète sur un projet d'envergure réelle</div>
+                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Communication quotidienne structurée (rapports Teams)</div>
+                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Adaptation aux besoins d'utilisateurs non techniques</div>
+                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Participation active aux réunions de suivi associatives</div>
+                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Livraison de l'intégralité des fonctionnalités prévues</div>
+                </div>
+            </div>
+            <div class="about-card">
+                <h3 style="font-size:.95rem;margin-bottom:.8rem;"><i class="fa-solid fa-arrow-trend-up" style="color:var(--accent-blue-d)"></i> Axes de progression identifiés</h3>
+                <div class="recherche-list">
+                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Anticiper la charge sur les volumétries élevées dès la conception</div>
+                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Estimer les délais avec des marges de sécurité réalistes</div>
+                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Tester la sécurité systématiquement après chaque fonctionnalité</div>
+                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Approfondir Git en conditions de production réelle</div>
+                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Gérer la mise en production et la migration vers le serveur</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-card" style="margin-bottom:0;">
+            <h3 style="font-size:.95rem;margin-bottom:1rem;"><i class="fa-solid fa-layer-group" style="color:var(--accent-purple-d)"></i> Stack technologique utilisée pendant le stage</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:.6rem;">
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" style="width:18px;height:18px;"> PHP 8</span>
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg" style="width:18px;height:18px;"> Symfony 8</span>
+                <span class="interest-chip">Twig</span>
+                <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" style="width:18px;height:18px;"> Tailwind CSS</span>
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:18px;height:18px;"> JavaScript</span>
+                <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" style="width:18px;height:18px;"> SQL / MySQL</span>
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/doctrine/doctrine-original.svg" style="width:18px;height:18px;"> Doctrine ORM</span>
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="width:18px;height:18px;"> Git</span>
+                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" style="width:18px;height:18px;"> Notion</span>
+                <span class="interest-chip">Stitch (IA Design)</span>
             </div>
         </div>
     </div>
 </div>
 
 <!-- ═══════════════════ REFERENTIEL BUT ═══════════════════ -->
-<div class="section-wrap alt" id="comp-but">
+<section class="section-wrap alt" id="comp-but">
     <div class="inner">
         <div class="section-label">Validation</div>
         <h2 class="section-title">Suivi du Référentiel National BUT</h2>
-        <p class="section-sub">Évaluation de mes compétences vis-à-vis du programme officiel national de l'IUT.</p>
+        <p class="section-sub">Bilan de compétences et auto-évaluation de mes réalisations techniques durant mes projets et missions de stage.</p>
 
-        <div class="comp-but-grid">
+        <div class="comp-but-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
 
             <!-- RÉALISER -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-purple-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-purple); color:var(--accent-purple-d)"><i class="fa-solid fa-code"></i></div>
-                        <h3>Réaliser</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-purple); color:var(--accent-purple-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-code"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Réaliser</h3>
                     </div>
-                    <p class="comp-desc">Développer des applications d'envergure, de l'analyse des besoins au déploiement de solutions testées.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>SAÉ-S2</code> Calculateur de trajets</div>
-                        <div><code>SAÉ-S3</code> Application multi-jeux</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Développement d'applications d'envergure, de la programmation des composants métiers jusqu'à la mise en place de tunnels sécurisés.
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-purple); color: var(--accent-purple-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Catalogue &amp; Inscriptions Symfony</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #ececf6; color: #4a4a8a; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S3</code> Jeu réseau multijoueur</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #ececf6; color: #4a4a8a; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S2</code> Calculateur de trajets</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:75%; background:var(--accent-purple-d)"></div></div>
-                        <span class="progress-label">75%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Excellente maîtrise de l'architecture MVC et développement fluide de l'interface JavaScript.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> Une phase de tests unitaires plus poussée aurait permis de détecter plus tôt certains cas limites sur les formulaires.
                 </div>
             </div>
 
             <!-- OPTIMISER -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-blue-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-blue); color:var(--accent-blue-d)"><i class="fa-solid fa-gauge-high"></i></div>
-                        <h3>Optimiser</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-blue); color:var(--accent-blue-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-gauge-high"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Optimiser</h3>
                     </div>
-                    <p class="comp-desc">Sélectionner des algorithmes performants et adapter les structures pour répondre aux fortes charges.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>SAÉ-S1</code> Algorithmes de tri en C</div>
-                        <div><code>STAGE</code> Optimisation requêtes ORM</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Analyse des temps de réponse et restructuration du code pour supporter les fortes volumétries de données sans perte de performance.
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-blue); color: var(--accent-blue-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Gestion mémoire &amp; Pagination</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-blue); color: var(--accent-blue-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Algorithme de répartition</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #e6f0fa; color: #2b6cb0; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S1</code> Algorithmes de tri en C</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:70%; background:var(--accent-blue-d)"></div></div>
-                        <span class="progress-label">70%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Identification et résolution efficaces des fuites mémoires liées aux requêtes d'extraction globales.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> L'algorithme de répartition automatisé reste complexe à maintenir et pourrait être découpé en services plus isolés.
                 </div>
             </div>
 
             <!-- ADMINISTRER -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-green-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-green); color:var(--accent-green-d)"><i class="fa-solid fa-server"></i></div>
-                        <h3>Administrer</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-green); color:var(--accent-green-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-server"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Administrer</h3>
                     </div>
-                    <p class="comp-desc">Déployer, sécuriser et superviser des architectures systèmes, réseaux et bases de données.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>SAÉ-S3</code> Gestion de serveurs et Sockets</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Gestion fine de la sécurité applicative, traitement asynchrone des flux et contrôle de l'intégrité des accès.
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-green); color: var(--accent-green-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Pare-feu &amp; Rôles Symfony Security</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-green); color: var(--accent-green-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Symfony Messenger (Mails asynchrones)</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #eaf5ea; color: #2f855a; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S3</code> Serveur Linux &amp; Sockets</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:65%; background:var(--accent-green-d)"></div></div>
-                        <span class="progress-label">65%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Bonne mise en œuvre du système de rôles hiérarchiques et sécurisation des routes sensibles.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> La configuration initiale du bus de messages asynchrones a demandé beaucoup de temps de débogage sur l'environnement local.
                 </div>
             </div>
 
             <!-- GÉRER DONNÉES -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-yellow-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-yellow); color:var(--accent-yellow-d)"><i class="fa-solid fa-database"></i></div>
-                        <h3>Gérer les données</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-yellow); color:var(--accent-yellow-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-database"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Gérer les données</h3>
                     </div>
-                    <p class="comp-desc">Modéliser, administrer et exploiter de larges volumes d'informations de manière sécurisée.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>STAGE</code> Modélisation &amp; RGPD</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Conception de modèles de bases de données relationnelles complexes et manipulation de la donnée via des couches d'abstraction (ORM).
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-yellow); color: var(--accent-yellow-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Schéma relationnel MySQL (3k+ lignes)</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-yellow); color: var(--accent-yellow-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Persistance ORM Doctrine</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #fefcbf; color: #b7791f; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S3</code> Base de données MariaDB</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:80%; background:var(--accent-yellow-d)"></div></div>
-                        <span class="progress-label">80%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Modélisation rigoureuse des relations ManyToMany entre les intervenants et les ateliers.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> Une dépendance parfois trop forte à l'ORM au détriment de certaines requêtes SQL natives qui auraient pu optimiser les performances.
                 </div>
             </div>
 
             <!-- CONDUIRE -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-orange-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-orange); color:var(--accent-orange-d)"><i class="fa-solid fa-list-check"></i></div>
-                        <h3>Conduire</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-orange); color:var(--accent-orange-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-list-check"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Conduire</h3>
                     </div>
-                    <p class="comp-desc">Cadrer les besoins métiers et piloter les phases de développement d’un projet logiciel.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>STAGE</code> Planification Gantt &amp; Livrables</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Planification des étapes d’un cycle de développement et traduction de besoins fonctionnels complexes en tâches techniques.
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-orange); color: var(--accent-orange-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Gestion d'exigences &amp; Notion</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-orange); color: var(--accent-orange-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Cadrage &amp; Spécifications MoSCoW</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:60%; background:var(--accent-orange-d)"></div></div>
-                        <span class="progress-label">60%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Très bon découpage en modules sur Notion, permettant de respecter les jalons de livraison principaux.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> Sous-estimation initiale du temps nécessaire à l'intégration HTML/CSS sur l'espace d'administration.
                 </div>
             </div>
 
             <!-- COLLABORER -->
-            <div class="comp-card">
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-pink-d);">
                 <div>
-                    <div class="comp-header">
-                        <div class="comp-icon" style="background:var(--accent-pink); color:var(--accent-pink-d)"><i class="fa-solid fa-users"></i></div>
-                        <h3>Collaborer</h3>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <div class="comp-icon" style="background:var(--accent-pink); color:var(--accent-pink-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-users"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Collaborer</h3>
                     </div>
-                    <p class="comp-desc">S'intégrer dans une équipe, partager ses pratiques via Git et s'adapter aux rituels de gestion.</p>
-                    <div class="comp-niveau">Niveau 2 acquis</div>
-                    <div class="comp-acs">
-                        <div><code>SAÉ-S3</code> Travail d'équipe &amp; GitFlow</div>
+                    <p class="comp-desc" style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">
+                        Restitution claire de l’état d'avancement technique et adaptation de la communication face à un public métier non technique.
+                    </p>
+
+                    <div class="comp-acs" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: var(--accent-pink); color: var(--accent-pink-d); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">STAGE</code> Suivi Teams &amp; Retours bénévoles</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);"><code style="background: #ffe6f0; color: #b83280; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;">SAÉ-S3</code> Gestion GitFlow &amp; Tâches d'équipe</div>
                     </div>
                 </div>
-                <div class="comp-autoeval">
-                    <h5>Maîtrise</h5>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar"><div class="progress-fill" style="width:85%; background:var(--accent-pink-d)"></div></div>
-                        <span class="progress-label">85%</span>
-                    </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.8rem; line-height: 1.4;">
+                    <span style="color: green; font-weight: 600;">▲ Réussite :</span> Clarté dans la vulgarisation des contraintes techniques de l'application auprès des utilisateurs bénévoles.<br>
+                    <span style="color: #c53030; font-weight: 600;">▼ Axe d'amélioration :</span> Une communication plus proactive lors des phases de blocage technique aurait évité de décaler certaines revues de code.
                 </div>
             </div>
 
         </div>
     </div>
-</div>
+</section>
+
 
 <!-- ═══════════════════ CONTACT ═══════════════════ -->
 <div class="section-wrap" id="contact">
@@ -835,13 +1006,10 @@
             <p class="section-sub">Disponible pour échanger autour de vos opportunités d'alternance pour la rentrée 2026.</p>
 
             <div class="contact-cards">
-                <a href="#" target="_blank" class="contact-card cc-li">
+                <a href="https://www.linkedin.com/in/kenzo-lierley-31b839321" target="_blank" class="contact-card cc-li">
                     <i class="fa-brands fa-linkedin-in"></i> LinkedIn
                 </a>
-                <a href="mailto:kenzo.lierley@etu.univ-lyon1.fr" class="contact-card cc-mail">
-                    <i class="fa-solid fa-paper-plane"></i> Me contacter par e-mail
-                </a>
-                <a href="#" download class="contact-card cc-cv">
+                <a href="src/assets/files/CV_KenzoLierley.pdf" download class="contact-card cc-cv">
                     <i class="fa-solid fa-file-pdf"></i> Télécharger mon CV (PDF)
                 </a>
             </div>
@@ -957,6 +1125,29 @@
         });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
+
+    function loadTrailer() {
+        const container = document.getElementById('trailerContainer');
+
+        // On vérifie si l'iframe n'est pas déjà chargée pour éviter les doublons
+        if (!container.querySelector('iframe')) {
+            // Source de ta vidéo
+            const videoSrc = "src/assets/video/SAE_2026_CATZMESS_BP_GM_KL_WB_CJ.mp4";
+
+            // On génère l'iframe avec l'autoplay activé pour que la vidéo se lance immédiatement après le clic
+            container.innerHTML = `
+            <iframe src="${videoSrc}?autoplay=1"
+                    style="width: 100%; height: 100%; border: none;"
+                    frameborder="0"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen>
+            </iframe>`;
+
+            // On retire le curseur pointer et l'effet de clic
+            container.style.cursor = 'default';
+            container.removeAttribute('onclick');
+        }
+    }
 </script>
 
 </body>
