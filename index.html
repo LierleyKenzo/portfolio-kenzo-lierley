@@ -1,14 +1,963 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Kenzo LIERLEY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ── Palette Douce & Professionnelle ── */
+        :root {
+            --bg:           #FFFFFF; /* Fond blanc pur */
+            --bg-alt:       #F8FAFC; /* Gris-bleu très clair pour sections */
+            --bg-card:      #FFFFFF;
+            --border:       #E2E8F0; /* Bordure fine et discrète */
+            --text:         #1E293B; /* Ardoise foncé (très lisible, moins agressif que le noir) */
+            --muted:        #64748B; /* Texte secondaire */
+
+            /* Accents Pastel / Feutrés (Non vifs) */
+            --accent-purple:   #F1E9FA;
+            --accent-purple-d: #6D5294;
+            --accent-blue:     #E0F2FE;
+            --accent-blue-d:   #0369A1;
+            --accent-green:    #DCFCE7;
+            --accent-green-d:  #15803D;
+            --accent-yellow:   #FEF9C3;
+            --accent-yellow-d: #A16207;
+            --accent-orange:   #FFEDD5;
+            --accent-orange-d: #C2410C;
+            --accent-pink:     #FCE7F3;
+            --accent-pink-d:   #B91C1C;
+
+            --radius:   16px;
+            --radius-sm:8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        /* ── Reset de base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text); }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
+
+        /* ── Barre de Navigation Épurée ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.2rem 3rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px; color: var(--text);
+        }
+        .nav-links { display: flex; gap: 1rem; }
+        .nav-links a { font-size: .9rem; font-weight: 500; color: var(--muted); padding: .5rem .8rem; border-radius: var(--radius-sm); transition: all .2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--accent-purple); }
+
+        /* ── Section d'Accueil (Hero) ── */
+        #hero {
+            min-height: 85vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 8rem 3rem 4rem;
+            background: radial-gradient(circle at 90% 10%, #F5F3FF 0%, var(--bg) 60%);
+        }
+        .hero-inner {
+            display: flex; align-items: center; gap: 4rem; max-width: 1100px; width: 100%;
+        }
+        .hero-photo-wrap {
+            flex-shrink: 0; width: 200px; height: 200px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-text { flex: 1; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: var(--accent-green);
+            border-radius: 99px; padding: .3rem .9rem; margin-bottom: 1.2rem;
+            font-size: .8rem; font-weight: 600; color: var(--accent-green-d);
+        }
+        .dot-pulse { width: 8px; height: 8px; background: var(--accent-green-d); border-radius: 50%; }
+        .hero-text h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.2; margin-bottom: .8rem; letter-spacing: -1px; }
+        .hero-text h1 em { font-style: normal; color: var(--accent-purple-d); }
+        .hero-sub { font-size: 1.2rem; font-weight: 500; color: var(--muted); }
+        .hero-intro {
+            margin-top: 1.5rem; color: var(--muted); font-size: 1rem; max-width: 680px; line-height: 1.7;
+        }
+        .hero-cta { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .btn-p {
+            padding: .75rem 1.6rem; border-radius: var(--radius-sm);
+            background: var(--text); color: var(--bg); font-weight: 600; font-size: .95rem;
+            box-shadow: var(--shadow); transition: all .2s; cursor: pointer; border: none;
+        }
+        .btn-p:hover { background: #334155; transform: translateY(-1px); }
+        .btn-o {
+            padding: .75rem 1.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border);
+            background: var(--bg-card); color: var(--text); font-weight: 600; font-size: .95rem;
+            box-shadow: var(--shadow); transition: all .2s;
+        }
+        .btn-o:hover { background: var(--bg-alt); transform: translateY(-1px); }
+
+        /* ── Layout Global Des Sections ── */
+        .section-wrap { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+        .section-wrap.alt { background: var(--bg-alt); }
+        .inner { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            display: inline-flex; align-items: center; gap: .4rem;
+            font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--accent-blue-d); background: var(--accent-blue);
+            border-radius: 99px; padding: .25rem .75rem; margin-bottom: 1rem;
+        }
+        .section-title { font-size: 2rem; margin-bottom: .5rem; letter-spacing: -0.5px; }
+        .section-sub { font-size: .95rem; color: var(--muted); max-width: 600px; margin-bottom: 3.5rem; }
+
+        /* ── Tableau de Bord Mon Profil ── */
+        .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 2.5rem; }
+        .about-profile-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+            box-shadow: var(--shadow); text-align: center; height: max-content;
+        }
+        .profile-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--accent-orange); display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--accent-orange-d);
+        }
+        .profile-name { font-size: 1.25rem; font-weight: 700; }
+        .profile-role {
+            background: var(--bg-alt); color: var(--muted); border: 1px solid var(--border);
+            font-size: .8rem; font-weight: 600; border-radius: 99px; padding: .25rem .75rem;
+        }
+        .profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; width: 100%; }
+        .pstat { background: var(--bg-alt); border-radius: var(--radius-sm); padding: .75rem .5rem; border: 1px solid var(--border); }
+        .pstat-num { font-size: 1.3rem; font-weight: 700; color: var(--text); display: block; }
+        .pstat-label { font-size: .7rem; color: var(--muted); font-weight: 500; }
+
+        .profile-links { display: flex; flex-direction: column; gap: .5rem; width: 100%; }
+        .profile-link {
+            display: flex; align-items: center; gap: .7rem; font-size: .85rem; font-weight: 500;
+            color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .55rem .75rem;
+            transition: background .2s;
+        }
+        .profile-link:hover { background: var(--bg-alt); }
+
+        .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+        .about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+        .about-card h3 { font-size: 1.05rem; color: var(--text); display: flex; align-items: center; gap: .5rem; margin-bottom: 1.2rem; }
+        .about-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+        .parcours-list, .recherche-list { display: flex; flex-direction: column; gap: 1.2rem; }
+        .parcours-item { display: flex; align-items: flex-start; gap: .8rem; font-size: .88rem; color: var(--muted); }
+        .parcours-icon { width: 60px; height: 60px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text); }
+        .parcours-item strong { color: var(--text); display: block; font-size: .9rem; margin-bottom: .1rem; }
+
+        .recherche-item { display: flex; align-items: center; gap: .6rem; background: var(--bg-alt); border-radius: var(--radius-sm); padding: .6rem .8rem; font-size: .88rem; font-weight: 500; border: 1px solid var(--border); }
+        .interests-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .interest-chip { display: inline-flex; align-items: center; gap: .4rem; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 99px; padding: .35rem .85rem; font-size: .82rem; font-weight: 500; color: var(--text); }
+
+        /* ── Section Outils & Compétences ── */
+        .competences-tabs { display: flex; gap: .5rem; margin-bottom: 2rem; }
+        .tab-btn { padding: .45rem 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: .85rem; font-weight: 600; background: white; color: var(--muted); cursor: pointer; transition: all .2s; }
+        .tab-btn.active, .tab-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+        .carousel-wrap { overflow: hidden; position: relative; padding: .5rem 0; }
+        .carousel-track { display: flex; gap: 1.2rem; animation: scrollL 40s linear infinite; width: max-content; }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scrollL { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+        .skill-card {
+            flex-shrink: 0; width: 130px; height: 115px; background: white; border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; box-shadow: var(--shadow); position: relative; transition: transform .2s;
+        }
+        .skill-card:hover { transform: translateY(-2px); }
+        .skill-card img { width: 36px; height: 36px; object-fit: contain; }
+        .skill-card .sk-name { font-size: .8rem; font-weight: 600; }
+        .skill-tooltip { position: absolute; inset: 0; background: rgba(255,255,255,0.98); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; padding: .75rem; opacity: 0; transition: opacity .2s; border: 1px solid var(--border); }
+        .skill-card:hover .skill-tooltip { opacity: 1; }
+        .skill-tooltip p { font-size: .75rem; text-align: center; color: var(--muted); font-weight: 500; }
+
+        .skills-grid-view { display: none; }
+        .skills-grid-view.show { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 1.2rem; }
+        .skill-grid-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: .5rem; text-align: center; box-shadow: var(--shadow); }
+        .skill-grid-card img { width: 36px; height: 36px; object-fit: contain; }
+        .skill-grid-card .sk-name { font-size: .85rem; font-weight: 600; }
+        .skill-grid-card .sk-desc { font-size: .72rem; color: var(--muted); }
+
+        /* ── Cartes Projets Épurées ── */
+        .projets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px,1fr)); gap: 2rem; }
+        .projet-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+        .projet-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .projet-cover { height: 180px; overflow: hidden; border-bottom: 1px solid var(--border); }
+        .projet-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .projet-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+        .projet-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+        .tag { font-size: .7rem; font-weight: 600; padding: .2rem .6rem; border-radius: 99px; }
+
+        .projet-title { font-size: 1.2rem; margin-bottom: .5rem; letter-spacing: -0.3px; }
+        .projet-desc { font-size: .88rem; color: var(--muted); margin-bottom: 1.2rem; }
+        .projet-role { background: var(--bg-alt); border-radius: var(--radius-sm); padding: .75rem 1rem; margin-bottom: 1.2rem; font-size: .82rem; color: var(--muted); border: 1px solid var(--border); }
+        .projet-role strong { color: var(--text); }
+        .projet-techs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.2rem; }
+
+        .btn-more { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; font-weight: 600; color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .45rem 1rem; background: var(--bg); cursor: pointer; transition: background .2s; }
+        .btn-more:hover { background: var(--bg-alt); }
+        .projet-expanded { display: none; padding: 1.5rem; border-top: 1px dashed var(--border); background: var(--bg-alt); }
+        .projet-expanded.open { display: block; }
+        .exp-section-title { font-size: .75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text); margin: 1rem 0 .4rem; font-weight: 700; }
+        .projet-expanded p, .projet-expanded li { font-size: .82rem; color: var(--muted); }
+        .projet-expanded ul { padding-left: 1.1rem; }
+        .comp-badges { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; }
+        .comp-badge { display: inline-flex; align-items: center; font-size: .7rem; font-weight: 600; padding: .15rem .5rem; border-radius: 4px; border: 1px solid var(--border); background: white; color: var(--muted); }
+
+        /* ── Bloc Expérience Pro (Stage) ── */
+        .stage-enterprise { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; display: flex; gap: 1.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; align-items: center; }
+        .stage-logo-box { width: 64px; height: 64px; border-radius: var(--radius-sm); background: var(--accent-purple); color: var(--accent-purple-d); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+        .stage-info h3 { font-size: 1.25rem; letter-spacing: -0.3px; }
+        .stage-period { font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: .25rem; }
+        .missions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 1.5rem; }
+        .mission-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .mission-img { height: 80px; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--muted); border-bottom: 1px solid var(--border); }
+        .mission-body { padding: 1.2rem; }
+        .mission-body h4 { font-size: .9rem; margin-bottom: .3rem; }
+        .mission-body p { font-size: .8rem; color: var(--muted); }
+
+        /* ── Bloc Référentiel National ── */
+        .comp-but-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 1.5rem; }
+        .comp-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
+        .comp-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+        .comp-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .comp-card h3 { font-size: 1.1rem; }
+        .comp-desc { font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+        .comp-niveau { display: inline-block; font-size: .7rem; font-weight: 600; border: 1px solid var(--border); border-radius: 99px; padding: .15rem .6rem; margin-bottom: .8rem; width: max-content; color: var(--muted); background: var(--bg-alt); }
+        .comp-acs { display: flex; flex-direction: column; gap: .35rem; font-size: .78rem; }
+        .comp-ac code { font-family: inherit; font-weight: 600; background: var(--bg-alt); color: var(--text); border: 1px solid var(--border); padding: .05rem .3rem; border-radius: 4px; margin-right: .3rem; font-size: .72rem; }
+
+        .comp-autoeval { margin-top: 1.2rem; border-top: 1px dashed var(--border); padding-top: 1rem; }
+        .comp-autoeval h5 { font-size: .75rem; margin-bottom: .3rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; }
+        .progress-bar-wrap { display: flex; align-items: center; gap: .6rem; margin-top: .4rem; }
+        .progress-bar { flex: 1; height: 6px; background: var(--bg-alt); border-radius: 99px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 99px; }
+        .progress-label { font-size: .75rem; font-weight: 600; color: var(--text); }
+
+        /* ── Zone de Contact ── */
+        .contact-box { max-width: 600px; margin: 0 auto; text-align: center; }
+        .contact-cards { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+        .contact-card { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.4rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font-weight: 600; font-size: .9rem; box-shadow: var(--shadow); transition: all .2s; }
+        .contact-card i { font-size: 1.1rem; }
+        .contact-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+        .cc-li { background: var(--accent-blue); color: var(--accent-blue-d); border-color: transparent; }
+        .cc-mail { background: var(--accent-orange); color: var(--accent-orange-d); border-color: transparent; }
+        .cc-cv { background: var(--text); color: var(--bg); border-color: transparent; }
+
+        footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem; font-size: .85rem; color: var(--muted); background: var(--bg); }
+        footer a { color: var(--text); font-weight: 500; text-decoration: underline; }
+
+        @media (max-width: 820px) {
+            .hero-inner { flex-direction: column; text-align: center; gap: 2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-cards-row { grid-template-columns: 1fr; }
+            nav { padding: 1rem 1.5rem; }
+            .section-wrap { padding: 4rem 1.5rem; }
+        }
+
+        #hero {
+            position: relative; /* Indispensable pour positionner l'image par-dessus le fond mais sous le texte */
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 3rem 4rem;
+            overflow: hidden; /* Empêche le flou de déborder en dehors de la section */
+            background: var(--bg); /* Fond de secours si l'image ne charge pas */
+        }
+
+        /* Style de l'image de paysage en arrière-plan */
+        #imagePaysage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'image s'adapte sans être déformée */
+            object-position: center;
+
+            /* L'effet de flou */
+            filter: blur(12px);
+
+            /* Optionnel : Légère réduction de l'opacité ou zoom pour éviter les bords blancs dus au flou */
+            transform: scale(1.05);
+            opacity: 0.6; /* Permet au fond clair/blanc du site de s'harmoniser avec l'image */
+
+            z-index: 1; /* Place l'image au premier niveau de la section */
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1000px;
+            width: 100%;
+
+            /* ── LA CARTE ── */
+            background: rgba(255, 255, 255, 0.85); /* Fond blanc pur mais légèrement transparent */
+            backdrop-filter: blur(10px); /* Renforce le flou de l'arrière-plan juste sous la carte */
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 24px; /* Beaux angles arrondis modernes */
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Bordure blanche très discrète */
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05); /* Ombre ultra douce, pas "cartoon" */
+        }
+
+        /* Petit ajustement pour le mobile */
+        @media (max-width: 820px) {
+            .hero-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem 1.5rem;
+                margin: 0 1rem; /* Évite que la carte colle aux bords de l'écran */
+            }
+        }
+
+        .profile-avatar {
+            width: 100px;         /* Ajuste la taille globale du rond selon tes besoins */
+            height: 100px;        /* Doit être identique à la largeur */
+            border-radius: 50%;   /* Rend le conteneur parfaitement rond */
+            overflow: hidden;     /* Coupe tout ce qui dépasse du cercle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border); /* Optionnel : fine bordure claire pour rester dans le thème */
+            box-shadow: var(--shadow);       /* Optionnel : légère ombre douce */
+        }
+
+        #imageProfil {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;    /* Centrera et recadrera l'image sans l'écraser ni la déformer */
+            object-position: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- BARRE DE NAVIGATION -->
+<nav>
+    <div class="nav-logo">Kenzo Lierley</div>
+    <div class="nav-links">
+        <a href="#about">Profil</a>
+        <a href="#competences-tech">Technologies</a>
+        <a href="#projets">Projets (SAÉ)</a>
+        <a href="#stage">Stage BUT 2</a>
+        <a href="#comp-but">Référentiel de compétences</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- ═══════════════════ ACCUEIL ═══════════════════ -->
+<section id="hero">
+    <img id="imagePaysage" src="src/assets/images/paysage.png" alt="">
+    <div class="hero-inner">
+        <div class="hero-photo-wrap">
+            <img src="src/assets/images/IMG_5667.jpg" alt="" />
+        </div>
+        <div class="hero-text">
+            <div class="hero-badge">
+                Portfolio - 2026
+            </div>
+            <h1>Salut, je suis <em>Kenzo</em></h1>
+            <p class="hero-sub">Développeur Informatique · Étudiant en BUT</p>
+            <div class="hero-intro">
+                Bienvenue sur mon portfolio. Actuellement en cours de validation de ma 2e année de BUT Informatique, j'ai conçu cet espace pour vous présenter mes réalisations majeures et mon suivi de compétences. En vue de ma rentrée en <strong>BUT3 (Rentrée 2026)</strong> dans le parcours <strong>Réalisation d’Applications</strong>, je recherche activement une alternance d’un an pour mettre ma rigueur et mes compétences au service de vos projets.
+            </div>
+            <div class="hero-cta">
+                <a href="#about" class="btn-p">Consulter mon profil</a>
+                <a href="#projets" class="btn-o">Voir mes projets</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ TABLEAU DE BORD PROFIL ═══════════════════ -->
+<div class="section-wrap alt" id="about">
+    <div class="inner">
+        <div class="section-label">Profil</div>
+        <h2 class="section-title">Présentation</h2>
+        <p class="section-sub">Toutes les informations clés sur mon parcours académique et mes objectifs.</p>
+
+        <div class="about-grid">
+            <!-- Profil principal -->
+            <div class="about-profile-card">
+                <div class="profile-avatar"><img id="imageProfil" src="src/assets/images/IMG_5667.jpg" alt="" /></div>
+                <div class="profile-name">Kenzo LIERLEY</div>
+                <span class="profile-role">Développeur - Étudiant BUT</span>
+
+                <div class="profile-links">
+                    <h3>Les liens utiles</h3>
+                    <a href="https://www.linkedin.com/in/kenzo-lierley-31b839321" target="_blank" class="profile-link"><i class="fa-brands fa-linkedin" style="color:#0077B5"></i> LinkedIn</a>
+                    <a href="https://github.com/LierleyKenzo" target="_blank" class="profile-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a download="" href="src/assets/files/CV_KenzoLierley.pdf" class="profile-link"><i class="fa-solid fa-file" style="color:var(--accent-orange-d)"></i> Mon CV</a>
+                </div>
+            </div>
+
+            <div class="about-right">
+                <div class="about-cards-row">
+                    <!-- Mon parcours -->
+                    <div class="about-card">
+                        <h3><i class="fa-solid fa-graduation-cap" style="color:var(--accent-purple-d)"></i> Formations</h3>
+                        <div class="parcours-list">
+                            <div class="parcours-item">
+                                <div class="parcours-icon"><img id="logoIUT" src="src/assets/images/logoIUT.png" alt=""></div>
+                                <div>
+                                    <strong>BUT Informatique — IUT Lyon 1</strong>
+                                    2024 → 2026 · Parcours réalisation d'application (2ème année)
+                                </div>
+                            </div>
+                            <div class="parcours-item">
+                                <div class="parcours-icon"><i class="fa-solid fa-school"></i></div>
+                                <div>
+                                    <strong>Baccalauréat Général</strong>
+                                    Diplômé en 2024 · Spécialités Mathématiques &amp; NSI.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ce que je recherche -->
+                    <div class="about-card">
+                        <h3><i class="fa-solid fa-search" style="color:var(--accent-green-d)"></i> Ce que je recherche</h3>
+                        <div class="recherche-list">
+                            <div class="recherche-item"><i class="fa-solid fa-handshake" style="color:var(--accent-green-d)"></i> Alternance d'un an (BUT3)</div>
+                            <div class="recherche-item"><i class="fa-solid fa-calendar-days" style="color:var(--accent-green-d)"></i> Rentrée d'Automne 2026</div>
+                            <div class="recherche-item"><i class="fa-solid fa-briefcase" style="color:var(--accent-green-d)"></i> Développement logiciel/web</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fa-solid fa-code-branch" style="color:var(--accent-purple-d)"></i> Ma ligne de conduite</h3>
+                    <div class="recherche-list">
+                        <div class="recherche-item">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent-purple-d)"></i>
+                            <span><strong>Code propre &amp; maintenable :</strong> Priorité à la lisibilité et au respect des conventions (SOLID, Clean Code).</span>
+                        </div>
+                        <div class="recherche-item">
+                            <i class="fa-solid fa-book-open" style="color:var(--accent-blue-d)"></i>
+                            <span><strong>Apprentissage continu :</strong> Curieux de nature, j'aime comprendre le "pourquoi" derrière chaque outil.</span>
+                        </div>
+                        <div class="recherche-item">
+                            <i class="fa-solid fa-list-check" style="color:var(--accent-green-d)"></i>
+                            <span><strong>Gestion de projet &amp; Agilité :</strong> Habitué au flux de travail collaboratif et adepte d'une communication transparente lors des échanges d'équipe.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════ COMPÉTENCES TECH ═══════════════════ -->
+<div class="section-wrap" id="competences-tech">
+    <div class="inner">
+        <div class="section-label">Outils</div>
+        <h2 class="section-title">Compétences Techniques</h2>
+        <p class="section-sub">Aperçu des langages et outils mobilisés au cours de mes projets académiques et professionnels.</p>
+
+        <div class="competences-tabs">
+            <button class="tab-btn active" onclick="switchView('carousel',this)">Défilé</button>
+            <button class="tab-btn" onclick="switchView('grid',this)">Tout afficher en grille</button>
+        </div>
+
+        <!-- Carousel Dynamique -->
+        <div id="view-carousel">
+            <div class="carousel-wrap">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+        </div>
+
+        <!-- Grille Statique -->
+        <div class="skills-grid-view" id="view-grid"></div>
+    </div>
+</div>
+
+<!-- ═══════════════════ PROJETS ACADÉMIQUES ═══════════════════ -->
+<div class="section-wrap alt" id="projets">
+    <div class="inner">
+        <div class="section-label">Projets</div>
+        <h2 class="section-title">Projets BUT (SAÉ)</h2>
+        <p class="section-sub">Projets de groupe mettant en œuvre les compétences travaillés au sein de la formation.</p>
+
+        <div class="projets-grid">
+
+            <!-- SAE 1 -->
+            <div class="projet-card">
+                <div class="projet-cover">
+                    <img src="src/assets/images/saeS1.png" alt="Console" />
+                </div>
+                <div class="projet-body">
+                    <div class="projet-tags">
+                        <span class="tag" style="background:var(--accent-orange); color:var(--accent-orange-d)">Algorithmique</span>
+                        <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S1</span>
+                    </div>
+                    <h3 class="projet-title">Traitement Algorithmique CSV</h3>
+                    <p class="projet-desc">Conception d'un utilitaire en ligne de commande pour le tri et le filtrage performant de données volumineuses.</p>
+                    <div class="projet-role">
+                        <strong>Contexte :</strong> Manipulation de structures de données en mémoire vive et optimisation du temps d'exécution.
+                    </div>
+                    <div class="projet-techs">
+                        <span class="interest-chip">C</span>
+                        <span class="interest-chip">Bash</span>
+                    </div>
+                    <button class="btn-more" onclick="toggleProjet(this)">
+                        <i class="fa-solid fa-plus"></i> Détails du projet
+                    </button>
+                </div>
+                <div class="projet-expanded">
+                    <div class="exp-section-title">Réalisations Clés</div>
+                    <ul>
+                        <li>Algorithmes de tri optimisés sans bibliothèque externe</li>
+                        <li>Gestion de l'allocation dynamique et des pointeurs</li>
+                        <li>Écriture de scripts de tests automatisés en Bash</li>
+                    </ul>
+                    <div class="exp-section-title">Analyse rétrospective</div>
+                    <p>La dépendance à l'environnement d'exécution local initial complique sa portabilité actuelle. Cela m'a poussé à étudier l'importance de la conteneurisation (Docker) pour mes futurs projets.</p>
+                    <div class="exp-section-title">Compétences ciblées</div>
+                    <div class="comp-badges">
+                        <span class="comp-badge">Optimiser</span>
+                        <span class="comp-badge">Réaliser</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAE 2 -->
+            <div class="projet-card">
+                <div class="projet-cover">
+                    <img src="src/assets/images/saeS2.png" alt="" />
+                </div>
+                <div class="projet-body">
+                    <div class="projet-tags">
+                        <span class="tag" style="background:var(--accent-blue); color:var(--accent-blue-d)">Interface Graphique</span>
+                        <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S2</span>
+                    </div>
+                    <h3 class="projet-title">Calculateur d'Itinéraires Urbains</h3>
+                    <p class="projet-desc">Application déterminant les chemins optimaux en utilisant différents algorithmes de parcours de graphe.</p>
+                    <div class="projet-role">
+                        <strong>Contexte :</strong> Implémentation d'algorithmes de graphes et conception d'une interface utilisateur fluide en Java/JavaSwing.
+                    </div>
+                    <div class="projet-techs">
+                        <span class="interest-chip">Java</span>
+                        <span class="interest-chip">Java Swing</span>
+                    </div>
+                    <button class="btn-more" onclick="toggleProjet(this)">
+                        <i class="fa-solid fa-plus"></i> Détails du projet
+                    </button>
+                </div>
+                <div class="projet-expanded">
+                    <div class="exp-section-title">Réalisations Clés</div>
+                    <ul>
+                        <li>Modélisation de réseaux sous forme de graphes mathématiques</li>
+                        <li>Calcul de trajectoires en temps réel</li>
+                        <li>Gestion asynchrone des actions de l'utilisateur sur l'interface</li>
+                    </ul>
+                    <div class="exp-section-title">Compétences ciblées</div>
+                    <div class="comp-badges">
+                        <span class="comp-badge">Optimiser</span>
+                        <span class="comp-badge">Réaliser</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAE 3 -->
+            <div class="projet-card">
+                <div class="projet-cover">
+                    <img src="src/assets/images/catzmess.png" alt="Réseau" />
+                </div>
+                <div class="projet-body">
+                    <div class="projet-tags">
+                        <span class="tag" style="background:var(--accent-pink); color:var(--accent-pink-d)">Réseau &amp; Système</span>
+                        <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ S3-S4</span>
+                    </div>
+                    <h3 class="projet-title">Catzmess — Jeu Réseau Multijoueur</h3>
+                    <p class="projet-desc">Jeu de plateforme multijoueur en ligne impliquant la mise en place d'un serveur de jeu et d'une base de données.</p>
+                    <div class="projet-role">
+                        <strong>Contexte :</strong> Projet annuel axé sur la programmation système et l'administration réseau d'un serveur dédié.
+                    </div>
+                    <div class="projet-techs">
+                        <span class="interest-chip">C++</span>
+                        <span class="interest-chip">SQL</span>
+                        <span class="interest-chip">Réseau</span>
+                    </div>
+                    <button class="btn-more" onclick="toggleProjet(this)">
+                        <i class="fa-solid fa-plus"></i> Détails du projet
+                    </button>
+                </div>
+                <div class="projet-expanded">
+                    <div class="exp-section-title">Réalisations Clés</div>
+                    <ul>
+                        <li>Gestion de la communication réseau par Sockets (C++/Json)</li>
+                        <li>Conception et interconnexion d'une base de données relationnelle</li>
+                        <li>Configuration matérielle d'un serveur Linux (ordinateur personnel) pour héberger le backend (sur un réseau personnel)</li>
+                    </ul>
+                    <div class="exp-section-title">Compétences ciblées</div>
+                    <div class="comp-badges">
+                        <span class="comp-badge">Administrer</span>
+                        <span class="comp-badge">Collaborer</span>
+                        <span class="comp-badge">Réaliser</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════ EXPERIENCE DE STAGE ═══════════════════ -->
+<div class="section-wrap" id="stage">
+    <div class="inner">
+        <div class="section-label">Professionnel</div>
+        <h2 class="section-title">Expérience en Stage</h2>
+        <p class="section-sub">Bilan de mes 12 semaines de stage dédiées au développement applicatif et à la gestion de données.</p>
+
+        <div class="stage-enterprise">
+            <div class="stage-logo-box"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="stage-info">
+                <h3>Développement Back-End &amp; Optimisation — Milieu Associatif</h3>
+                <div class="stage-period"><i class="fa-regular fa-calendar"></i> Stage de 10 semaines · Mission d'évolution et mise en conformité informatique</div>
+                <p>Intervention sur la refonte globale de l'application, l'optimisation des performances serveurs et la mise en conformité des flux d'informations.</p>
+            </div>
+        </div>
+
+        <div class="missions-grid">
+            <div class="mission-card">
+                <div class="mission-img" style="background:var(--accent-blue); color:var(--accent-blue-d)"><i class="fa-solid fa-globe"></i></div>
+                <div class="mission-body">
+                    <h4>M1 — Catalogue Applicatif</h4>
+                    <p>Modernisation de l'interface d'inscription et filtres dynamiques en JavaScript pour une fluidité accrue.</p>
+                </div>
+            </div>
+            <div class="mission-card">
+                <div class="mission-img" style="background:var(--accent-orange); color:var(--accent-orange-d)"><i class="fa-solid fa-gears"></i></div>
+                <div class="mission-body">
+                    <h4>M2 — Performance &amp; Back-Office</h4>
+                    <p>Résolution des surcharges mémoire du serveur via l'optimisation des jointures de l'ORM Doctrine pour plus de 3 000 usagers.</p>
+                </div>
+            </div>
+            <div class="mission-card">
+                <div class="mission-img" style="background:var(--accent-yellow); color:var(--accent-yellow-d)"><i class="fa-solid fa-bolt"></i></div>
+                <div class="mission-body">
+                    <h4>M3 — Tâches Asynchrones</h4>
+                    <p>Mise en place d'un système de file d'attente avec Symfony Messenger pour l'envoi de notifications par e-mail en arrière-plan.</p>
+                </div>
+            </div>
+            <div class="mission-card">
+                <div class="mission-img" style="background:var(--accent-pink); color:var(--accent-pink-d)"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="mission-body">
+                    <h4>M4 — RGPD &amp; Business Intelligence</h4>
+                    <p>Sécurisation et anonymisation des données sensibles, couplées à la création de rapports décisionnels sous PowerBI.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════ REFERENTIEL BUT ═══════════════════ -->
+<div class="section-wrap alt" id="comp-but">
+    <div class="inner">
+        <div class="section-label">Validation</div>
+        <h2 class="section-title">Suivi du Référentiel National BUT</h2>
+        <p class="section-sub">Évaluation de mes compétences vis-à-vis du programme officiel national de l'IUT.</p>
+
+        <div class="comp-but-grid">
+
+            <!-- RÉALISER -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-purple); color:var(--accent-purple-d)"><i class="fa-solid fa-code"></i></div>
+                        <h3>Réaliser</h3>
+                    </div>
+                    <p class="comp-desc">Développer des applications d'envergure, de l'analyse des besoins au déploiement de solutions testées.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>SAÉ-S2</code> Calculateur de trajets</div>
+                        <div><code>SAÉ-S3</code> Application multi-jeux</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:75%; background:var(--accent-purple-d)"></div></div>
+                        <span class="progress-label">75%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPTIMISER -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-blue); color:var(--accent-blue-d)"><i class="fa-solid fa-gauge-high"></i></div>
+                        <h3>Optimiser</h3>
+                    </div>
+                    <p class="comp-desc">Sélectionner des algorithmes performants et adapter les structures pour répondre aux fortes charges.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>SAÉ-S1</code> Algorithmes de tri en C</div>
+                        <div><code>STAGE</code> Optimisation requêtes ORM</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:70%; background:var(--accent-blue-d)"></div></div>
+                        <span class="progress-label">70%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMINISTRER -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-green); color:var(--accent-green-d)"><i class="fa-solid fa-server"></i></div>
+                        <h3>Administrer</h3>
+                    </div>
+                    <p class="comp-desc">Déployer, sécuriser et superviser des architectures systèmes, réseaux et bases de données.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>SAÉ-S3</code> Gestion de serveurs et Sockets</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:65%; background:var(--accent-green-d)"></div></div>
+                        <span class="progress-label">65%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GÉRER DONNÉES -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-yellow); color:var(--accent-yellow-d)"><i class="fa-solid fa-database"></i></div>
+                        <h3>Gérer les données</h3>
+                    </div>
+                    <p class="comp-desc">Modéliser, administrer et exploiter de larges volumes d'informations de manière sécurisée.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>STAGE</code> Modélisation &amp; RGPD</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:80%; background:var(--accent-yellow-d)"></div></div>
+                        <span class="progress-label">80%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONDUIRE -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-orange); color:var(--accent-orange-d)"><i class="fa-solid fa-list-check"></i></div>
+                        <h3>Conduire</h3>
+                    </div>
+                    <p class="comp-desc">Cadrer les besoins métiers et piloter les phases de développement d’un projet logiciel.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>STAGE</code> Planification Gantt &amp; Livrables</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:60%; background:var(--accent-orange-d)"></div></div>
+                        <span class="progress-label">60%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLLABORER -->
+            <div class="comp-card">
+                <div>
+                    <div class="comp-header">
+                        <div class="comp-icon" style="background:var(--accent-pink); color:var(--accent-pink-d)"><i class="fa-solid fa-users"></i></div>
+                        <h3>Collaborer</h3>
+                    </div>
+                    <p class="comp-desc">S'intégrer dans une équipe, partager ses pratiques via Git et s'adapter aux rituels de gestion.</p>
+                    <div class="comp-niveau">Niveau 2 acquis</div>
+                    <div class="comp-acs">
+                        <div><code>SAÉ-S3</code> Travail d'équipe &amp; GitFlow</div>
+                    </div>
+                </div>
+                <div class="comp-autoeval">
+                    <h5>Maîtrise</h5>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"><div class="progress-fill" style="width:85%; background:var(--accent-pink-d)"></div></div>
+                        <span class="progress-label">85%</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<div class="section-wrap" id="contact">
+    <div class="inner">
+        <div class="contact-box">
+            <div class="section-label">Opportunité</div>
+            <h2 class="section-title">Restons en contact</h2>
+            <p class="section-sub">Disponible pour échanger autour de vos opportunités d'alternance pour la rentrée 2026.</p>
+
+            <div class="contact-cards">
+                <a href="#" target="_blank" class="contact-card cc-li">
+                    <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                </a>
+                <a href="mailto:kenzo.lierley@etu.univ-lyon1.fr" class="contact-card cc-mail">
+                    <i class="fa-solid fa-paper-plane"></i> Me contacter par e-mail
+                </a>
+                <a href="#" download class="contact-card cc-cv">
+                    <i class="fa-solid fa-file-pdf"></i> Télécharger mon CV (PDF)
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Kenzo LIERLEY · Portfolio de compétences BUT Informatique</p>
+</footer>
+
+<script>
+    const rawCategories = [
+        { title: "Dév. Application", items: ["Java", "Kotlin", "C", "C++", "Python", "Bash"] },
+        { title: "Dév. Web", items: ["PHP", "JavaScript", "HTML", "CSS", "Symfony", "Tailwind CSS"] },
+        { title: "Données & Infra", items: ["SQL", "PlantUML", "Docker", "PowerBI"] },
+        { title: "Gestion de projet", items: ["Git", "Figma", "Notion", "Gantt"] }
+    ];
+
+    // 💡 METS TES IMAGES PERSO ICI : Si une techno est ici, elle prendra cette image précise.
+    const customIcons = {
+        "sql": "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png", // Exemple local
+        "c": "https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png",
+        "c++": "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg", // Exemple URL
+        "html": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/500px-HTML5_logo_and_wordmark.svg.png",
+        "css": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/500px-CSS3_logo_and_wordmark.svg.png",
+        "plantuml": "src/assets/images/plantuml.png",
+        "powerbi": "https://img.icons8.com/color/48/null/power-bi.png",
+        "gantt": "src/assets/images/gantt.png",
+        "notion": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg"
+    };
+
+    const allSkills = [];
+    rawCategories.forEach(cat => {
+        cat.items.forEach(item => {
+            const lowerItem = item.toLowerCase();
+            let iconUrl = "";
+
+            // Si la techno est définie dans notre liste personnalisée, on l'utilise
+            if (customIcons[lowerItem]) {
+                iconUrl = customIcons[lowerItem];
+            } else {
+                // Sinon, génération automatique via Devicon
+                let slug = lowerItem.replace(" ", "").replace("++", "cpp");
+                iconUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-original.svg`;
+            }
+
+            allSkills.push({
+                name: item,
+                icon: iconUrl,
+                desc: ``
+            });
+        });
+    });
+
+    // Injection Carrousel (Suppression complète du bloc .skill-tooltip qui s'affichait au survol)
+    const track = document.getElementById('carouselTrack');
+    [...allSkills, ...allSkills].forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'skill-card';
+        card.innerHTML = `
+        <img src="${s.icon}" alt="${s.name}" onerror="this.src='https://img.icons8.com/pastel-glyph/64/000000/code.png'"/>
+        <span class="sk-name">${s.name}</span>
+    `;
+        track.appendChild(card);
+    });
+
+    // Injection Grille Statique
+    const grid = document.getElementById('view-grid');
+    allSkills.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'skill-grid-card';
+        card.innerHTML = `
+        <img src="${s.icon}" alt="${s.name}" onerror="this.src='https://img.icons8.com/pastel-glyph/64/000000/code.png'"/>
+        <div class="sk-name">${s.name}</div>
+    `;
+        grid.appendChild(card);
+    });
+
+    // Gestion des onglets Carrousel / Grille
+    function switchView(mode, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (mode === 'carousel') {
+            document.getElementById('view-carousel').style.display = 'block';
+            grid.classList.remove('show');
+        } else {
+            document.getElementById('view-carousel').style.display = 'none';
+            grid.classList.add('show');
+        }
+    }
+
+    // Dépliement des détails projets
+    function toggleProjet(btn) {
+        const card = btn.closest('.projet-card');
+        const exp = card.querySelector('.projet-expanded');
+        const isOpen = exp.classList.toggle('open');
+        btn.innerHTML = isOpen
+            ? '<i class="fa-solid fa-minus"></i> Masquer les détails'
+            : '<i class="fa-solid fa-plus"></i> Details du projet';
+    }
+
+    // Gestion du lien de navigation actif lors du défilement
+    const sections = document.querySelectorAll('div[id], section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
+</script>
+
+</body>
 </html>
