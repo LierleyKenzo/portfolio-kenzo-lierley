@@ -32,6 +32,9 @@
             --accent-orange-d: #C2410C;
             --accent-pink:     #FCE7F3;
             --accent-pink-d:   #B91C1C;
+            --accent-teal: #f0fdfa;
+            --accent-teal-d: #0f766e;
+
 
             --radius:   16px;
             --radius-sm:8px;
@@ -371,6 +374,93 @@
             object-fit: cover;    /* Centrera et recadrera l'image sans l'écraser ni la déformer */
             object-position: center;
         }
+
+        .comp-badges {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            margin-top: .9rem;
+            padding-top: .75rem;
+            border-top: 1px solid var(--border);
+        }
+        .comp-badge-row {
+            display: flex;
+            align-items: flex-start;
+            gap: .55rem;
+        }
+        .comp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            font-size: .7rem;
+            font-weight: 700;
+            padding: .22rem .6rem;
+            border-radius: 99px;
+            white-space: nowrap;
+            letter-spacing: .01em;
+            flex-shrink: 0;
+            margin-top: .05rem;
+        }
+        .comp-badge.realiser    { background: var(--accent-purple); color: var(--accent-purple-d); }
+        .comp-badge.optimiser   { background: var(--accent-orange);  color: var(--accent-orange-d); }
+        .comp-badge.administrer { background: var(--accent-teal);    color: var(--accent-teal-d); }
+        .comp-badge.gerer       { background: var(--accent-blue);    color: var(--accent-blue-d); }
+        .comp-badge.conduire    { background: var(--accent-green);   color: var(--accent-green-d); }
+        .comp-badge.collaborer  { background: var(--accent-pink);    color: var(--accent-pink-d); }
+        .comp-badge-reason {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ── Bilan card ── */
+        .comp-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+        }
+        .comp-card p { margin: 0; }
+
+        /* ── Mission card ── */
+        .mission-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .mission-body { padding: 1rem 1.1rem 1.1rem; }
+        .mission-body h4 { margin: 0 0 .5rem; font-size: .95rem; }
+        .mission-body p  { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.6; }
+        .mission-img {
+            font-size: 1.4rem;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── Niveau pill ── */
+        .niveau-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .78rem;
+            font-weight: 600;
+            padding: .28rem .7rem;
+            border-radius: 6px;
+            margin-top: .5rem;
+        }
+        .niveau-pill.excellent { background: #dcfce7; color: #15803d; }
+        .niveau-pill.solide    { background: #dbeafe; color: #1d4ed8; }
+        .niveau-pill.progres   { background: #fff7ed; color: #c2410c; }
+
+        /* ── Layout ── */
+        .missions-grid    { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .bilan-cards-row  { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .section-wrap     { padding: 2rem; max-width: 1200px; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -400,7 +490,7 @@
                 Portfolio - 2026
             </div>
             <h1>Salut, je suis <em>Kenzo</em></h1>
-            <p class="hero-sub">Développeur Informatique · Étudiant en BUT</p>
+            <p class="hero-sub">Développeur Informatique - Étudiant en BUT</p>
             <div class="hero-intro">
                 Bienvenue sur mon portfolio. Actuellement en cours de validation de ma 2e année de BUT Informatique, j'ai conçu cet espace pour présenter mes réalisations majeures et mon suivi de compétences. En vue de ma rentrée en <strong>BUT3 (Rentrée 2026)</strong> dans le parcours <strong>Réalisation d’Applications</strong>, je recherche activement une alternance d’un an pour mettre ma rigueur et mes compétences au service de vos projets.
             </div>
@@ -451,14 +541,14 @@
                                 <div class="parcours-icon"><img id="logoIUT" src="src/assets/images/logoIUT.png" alt="Logo IUT"></div>
                                 <div>
                                     <strong>BUT Informatique - IUT Lyon 1</strong>
-                                    2024 → 2027 · Parcours Réalisation d'Applications.
+                                    2024 2027 - Parcours Réalisation d'Applications.
                                 </div>
                             </div>
                             <div class="parcours-item">
                                 <div class="parcours-icon"><i class="fa-solid fa-school"></i></div>
                                 <div>
                                     <strong>Baccalauréat Général</strong>
-                                    Diplômé en 2024 · Spécialités Mathématiques et NSI.
+                                    Diplômé en 2024 - Spécialités Mathématiques et NSI.
                                 </div>
                             </div>
                         </div>
@@ -728,7 +818,7 @@
                 <img src="src/assets/images/logo-RI.png" alt="">
             </div>
             <div class="stage-info" style="flex:1;">
-                <div class="stage-period"><i class="fa-regular fa-calendar"></i>&nbsp; 07 avril → 26 juin 2026 · 10 semaines · Lyon</div>
+                <div class="stage-period"><i class="fa-regular fa-calendar"></i>&nbsp; 07 avril 26 juin 2026 - 10 semaines - Lyon</div>
                 <h3 style="margin:.3rem 0 .6rem;">À la découverte des professions <span style="font-size:.85rem;font-weight:500;color:var(--muted);">- Association Rotary, 33 Cours Albert Thomas, 69003 Lyon</span></h3>
                 <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:.8rem;">
                     Association fondée en 1969 par le Rotary Club de Lyon regroupant <strong>21 clubs Rotary</strong> de la métropole. Elle organise chaque année une journée d'orientation réunissant <strong>plus de 2 000 jeunes</strong>, 180 intervenants professionnels et 60 ateliers thématiques. Lors de ce stage j'ai travaillé en <strong>totale autonomie</strong> sous la supervision d'Alexis MONNET, CTO et Lead Developer PHP/Symfony.
@@ -779,125 +869,218 @@
         </div>
 
         <h3 style="font-size:1.1rem;margin-bottom:1.2rem;">Missions réalisées</h3>
-        <div class="missions-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2.5rem;">
 
-            <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-purple);font-size:1.4rem;color:var(--accent-purple-d);height:90px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-sitemap"></i></div>
-                <div class="mission-body">
-                    <h4>Analyse du besoin &amp; conception</h4>
-                    <p>Immersion dans les processus métiers de l'association, participation aux réunions, rédaction des spécifications fonctionnelles et structuration des tâches en <strong>5 piliers</strong> (Admin, Étudiant, Intervenant, Établissement, Global) via Notion. Priorisation MoSCoW avec le maître de stage, puis diagramme de Gantt prévisionnel.</p>
-                </div>
-            </div>
+            <!-- ═══════════════════ GRILLE DES MISSIONS (3 COLONNES, 2 LIGNES) ═══════════════════ -->
+            <div class="missions-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; items: start;">
 
-            <div class="mission-card">
-                <div class="mission-img" style="background:var(--accent-blue);font-size:1.4rem;color:var(--accent-blue-d);height:90px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-database"></i></div>
-                <div class="mission-body">
-                    <h4>Modélisation &amp; base de données</h4>
-                    <p>Conception du schéma relationnel global (ORM Doctrine / MySQL) supportant <strong>+3 000 étudiants</strong>, 180 intervenants et 60 ateliers. Tables de liaison pour gérer les droits d'accès par rôle strict. Maquettes UI réalisées avec l'IA Stitch en Mobile First.</p>
-                </div>
-            </div>
+                <!-- ── 1. Analyse & conception ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-purple-d); height: fit-content;">
+                    <div>
+                        <div class="mission-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                            <div class="mission-img" style="background:var(--accent-purple); color:var(--accent-purple-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-sitemap"></i></div>
+                            <h4 style="margin: 0; font-size: 1.1rem;">Analyse du besoin &amp; conception</h4>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Immersion dans les processus métiers de l'association, participation aux réunions, rédaction des spécifications fonctionnelles et structuration des tâches en <strong>5 piliers</strong> via Notion. Priorisation MoSCoW avec le maître de stage, puis diagramme de Gantt prévisionnel.</p>
 
-            <div class="mission-card">
-                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
-                    <img src="src/assets/images/catalogue.png" alt="Catalogue et Inscriptions" style="width:100%; height:100%; object-fit:contain;">
-                </div>
-                <div class="mission-body">
-                    <h4>Catalogue des ateliers &amp; inscriptions</h4>
-                    <p>Développement d'un catalogue interactif de <strong>100+ ateliers</strong> avec filtres dynamiques JavaScript par secteur, atelier et métiers. Inscription sécurisé pour les élèves (3ème → post-bac) : création de compte, choix des ateliers, protection des données des mineurs.</p>
-                </div>
-            </div>
-
-            <div class="mission-card">
-                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
-                    <img src="src/assets/images/crud.png" alt="Espace d'administration" style="width:100%; height:100%; object-fit:contain;">
-                </div>
-                <div class="mission-body">
-                    <h4>Espace d'administration &amp; CRUD</h4>
-                    <p>Tableau de bord complet de gestion de toutes les entités (étudiants, intervenants, lycées, clubs Rotary, encadrants…). Face aux problèmes de saturation mémoire sur 3 000+ lignes, mise en place d'une <strong>pagination stricte et de requêtes Doctrine ciblées</strong> réduisant drastiquement la consommation de ressources.</p>
-                </div>
-            </div>
-
-            <div class="mission-card">
-                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
-                    <img src="src/assets/images/repartition.png" alt="Algorithme de répartition" style="width:100%; height:100%; object-fit:contain;">
-                </div>
-                <div class="mission-body">
-                    <h4>Algorithme de répartition logistique</h4>
-                    <p>Conception d'une interface et d'algorithmes pour affecter les <strong>180 intervenants dans 60 ateliers</strong> et répartir les ateliers dans les salles. Vision d'ensemble avec indicateurs de remplissage par créneau et lancement de la répartition en un clic facilitant la logistique de l'évènement.</p>
-                </div>
-            </div>
-
-            <div class="mission-card">
-                <div class="mission-img" style="height:220px; overflow:hidden; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
-                    <img src="src/assets/images/email.png" alt="Système de messagerie" style="width:100%; height:100%; object-fit:contain;">
-                </div>
-                <div class="mission-body">
-                    <h4>Système d'e-mails &amp; statistiques</h4>
-                    <p>Intégration de <strong>Symfony Messenger</strong> pour l'envoi asynchrone de mails groupés (2 000+ destinataires sans blocage de l'interface). Templates d'e-mails personnalisables avec variables dynamiques (nom, prénom, planning…). Module de statistiques générant des <strong>graphiques en temps réel</strong> depuis les questionnaires.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Nouvelle ligne dédiée pour afficher les deux bilans côte à côte -->
-        <div class="bilan-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-
-            <!-- CARD RETOUR : COMPÉTENCES CONSOLIDÉES -->
-            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-green-d); background: var(--bg-card); border-radius: 8px;">
-                <div>
-                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
-                        <div class="comp-icon" style="background:var(--accent-green); color:var(--accent-green-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-star"></i></div>
-                        <h3 style="margin: 0; font-size: 1.2rem;">Bilan : Ce que le stage m'a apporté</h3>
+                        <!-- Conteneur pliable indépendant -->
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge conduire">Conduire - AC25.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">En participant aux réunions et en cartographiant les processus internes de l'association, j'ai identifié les flux d'information entre chaque acteur pour savoir quoi automatiser.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge conduire">Conduire - AC25.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">J'ai formalisé les besoins sous forme de 5 piliers avec contexte d'utilisation et actions attendues, soumis à validation par M. Monnet avant d'écrire la moindre ligne de code.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge conduire">Conduire - AC25.04</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">La construction du diagramme de Gantt et l'application de la méthode MoSCoW constituent une démarche de suivi de projet concrète que j'ai mise en œuvre et tenue tout au long du stage.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge collaborer">Collaborer - AC26.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Prendre connaissance des pratiques existantes (Excel, CRM, commandes serveur manuelles) et m'intégrer dans l'organisation bénévole de l'association a nécessité d'adopter une démarche d'intégration dans une équipe pluridisciplinaire non technique.</p></div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; display: flex; flex-direction: column; gap: 0.9rem;">
-                        <p style="margin: 0;">
-                            <strong>Autonomie technique :</strong> Ce projet m'a prouvé que j'étais capable de mener un développement complet en prenant mes propres décisions architecturales et de pouvoir justifier mes choix.
-                        </p>
-                        <p style="margin: 0;">
-                            <strong>Rigueur et suivi :</strong> L'instauration de rapports quotidiens sur Teams m'a forcé à structurer mon travail et m'a offert une visibilité totale sur l'avancement du projet.
-                        </p>
-                        <p style="margin: 0;">
-                            <strong>Posture professionnelle :</strong> Collaborer avec des interlocuteurs associatifs non technique m'a appris à traduire des contraintes techniques complexes en choix fonctionnels simples et compréhensibles.
-                        </p>
-                        <p style="margin: 0;">
-                            <strong>Respect des engagements :</strong> Malgré les défis logistiques, l'intégralité des fonctionnalités prévues au cahier des charges a été développée.
-                        </p>
-                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
                 </div>
-                <div class="comp-statut-qualitatif" style="font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 0.8rem; color: var(--accent-green-d); margin-top: 1.5rem;">
-                    Statut : Objectifs de stage atteints
+
+                <!-- ── 2. Modélisation BDD ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-blue-d); height: fit-content;">
+                    <div>
+                        <div class="mission-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                            <div class="mission-img" style="background:var(--accent-blue); color:var(--accent-blue-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-database"></i></div>
+                            <h4 style="margin: 0; font-size: 1.1rem;">Modélisation &amp; base de données</h4>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Conception du schéma relationnel global (ORM Doctrine / MySQL) supportant <strong>+3 000 étudiants</strong>, 180 intervenants et 60 ateliers. Tables de liaison pour gérer les droits d'accès par rôle strict. Maquettes UI réalisées avec l'IA Stitch en Mobile First.</p>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - AC14.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">J'ai conçu le schéma relationnel de zéro à partir du cahier des charges et des règles métiers de l'association, en traduisant les acteurs et leurs interactions en tables et relations Doctrine.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - AC24.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Les tables de liaison (ex. délégué ↔ lycée) ont été pensées pour optimiser le modèle de données en évitant les doublons et en garantissant que chaque rôle n'accède qu'à ses propres données.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - AC24.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Les droits d'accès par rôle strict (ROLE_ADMIN, ROLE_ELEVE, etc.) appliqués dès la couche de données assurent l'intégrité et la confidentialité des informations, notamment celles des mineurs.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">La modélisation a directement alimenté les spécifications techniques (entités Doctrine, contrôleurs Symfony) : la conception et l'implémentation ont été pensées ensemble dès le départ.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Les maquettes Stitch en Mobile First ont été conçues pour s'adapter à un public allant des jeunes lycéens sur téléphone aux bénévoles sur ordinateur, ce qui a guidé tous les choix d'ergonomie.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
+                </div>
+
+                <!-- ── 3. Catalogue & inscriptions ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-purple-d); height: fit-content;">
+                    <div>
+                        <div class="mission-img" style="height:120px; overflow:hidden; border-radius: 6px; margin-bottom: 1rem; display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                            <img src="src/assets/images/catalogue.png" alt="Catalogue et Inscriptions" style="width:100%; height:100%; object-fit:contain;">
+                        </div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">Catalogue des ateliers &amp; inscriptions</h4>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Développement d'un catalogue interactif de <strong>100+ ateliers</strong> avec filtres dynamiques JavaScript. Inscription sécurisée pour les élèves : création de compte, choix des ateliers et protection des mineurs.</p>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Le tunnel d'inscription découle directement des spécifications recueillies en réunion : chaque étape du parcours utilisateur a été implémentée selon les exigences.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Les filtres dynamiques JavaScript et l'interface Mobile First visaient explicitement à rendre la navigation intuitive pour des collégiens et lycéens.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">L'architecture MVC de Symfony, la séparation contrôleur/service/twig reflètent l'adoption de bonnes pratiques de conception.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - CE4.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Le message générique à la réinitialisation de mot de passe et le questionnaire interne répondent directement aux exigences RGPD.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge administrer">Administrer - AC23.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">La configuration du pare-feu Symfony et les rôles hiérarchisés empêchent tout accès non autorisé aux données personnelles.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
+                </div>
+
+                <!-- ── 4. Administration CRUD ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-blue-d); height: fit-content;">
+                    <div>
+                        <div class="mission-img" style="height:120px; overflow:hidden; border-radius: 6px; margin-bottom: 1rem; display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                            <img src="src/assets/images/crud.png" alt="Espace d'administration" style="width:100%; height:100%; object-fit:contain;">
+                        </div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">Espace d'administration &amp; CRUD</h4>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Tableau de bord de gestion de toutes les entités. Face aux problèmes de saturation mémoire sur 3 000+ lignes, mise en place d'une <strong>pagination stricte et de requêtes Doctrine ciblées</strong>.</p>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Chaque CRUD a été structuré avec des formulaires Symfony typés et une séparation claire des responsabilités.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC12.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Face à la saturation mémoire, j'ai identifié que charger 3 000 lignes sans filtre était la cause, avant de concevoir une solution ciblée.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC32.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Cet incident m'a appris à anticiper l'impact du volume de données sur les ressources système — une métrique majeure.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - CE2.04</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">La solution retenue a été validée auprès du maître de stage par une réduction drastique de la consommation mémoire.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - AC14.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Les tableaux de bord permettent d'interagir en temps réel de façon complète avec la base de données via Doctrine.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
+                </div>
+
+                <!-- ── 5. Algorithme de répartition ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-orange-d); height: fit-content;">
+                    <div>
+                        <div class="mission-img" style="height:120px; overflow:hidden; border-radius: 6px; margin-bottom: 1rem; display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                            <img src="src/assets/images/repartition.png" alt="Algorithme de répartition" style="width:100%; height:100%; object-fit:contain;">
+                        </div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">Algorithme de répartition logistique</h4>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Conception d'une interface et d'algorithmes complexes pour affecter automatiquement les <strong>180 intervenants dans 60 ateliers</strong> et répartir les salles selon les créneaux, en un seul clic.</p>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Cette fonctionnalité n'existait pas : j'ai dû repartir des contraintes métier concrètes pour implémenter les spécifications de zéro.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC12.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Le problème a nécessité un découpage algorithmique rigoureux sous contraintes avant d'écrire le code.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC22.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Choix de structures adaptées (tableaux associatifs indexés) pour éviter des boucles imbriquées lourdes et inutiles.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC22.02</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">L'algorithme s'appuie sur des techniques avancées d'affectation pour gérer efficacement les cas de conflits de créneaux.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge conduire">Conduire - CE5.04</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Proposer cette interface de répartition automatisée illustre une démarche proactive pour soulager les bénévoles.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
+                </div>
+
+                <!-- ── 6. E-mails & statistiques ── -->
+                <div class="mission-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top: 4px solid var(--accent-pink-d); height: fit-content;">
+                    <div>
+                        <div class="mission-img" style="height:120px; overflow:hidden; border-radius: 6px; margin-bottom: 1rem; display:flex; align-items:center; justify-content:center; background:#f8f9fa;">
+                            <img src="src/assets/images/email.png" alt="Système de messagerie" style="width:100%; height:100%; object-fit:contain;">
+                        </div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">Système d'e-mails &amp; statistiques</h4>
+                        <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem;">Intégration de <strong>Symfony Messenger</strong> pour l'envoi asynchrone de mails groupés (2000+ envois fluides). Production de graphiques et statistiques en temps réel.</p>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="comp-badges" style="display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem;">
+                                <div class="comp-badge-row"><span class="comp-badge realiser">Réaliser - AC21.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">L'intégration autonome de Symfony Messenger illustre la capacité à adopter un nouveau composant via sa documentation technique.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge optimiser">Optimiser - AC32.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Anticiper l'envoi de masse m'a conduit à choisir un traitement asynchrone pour éviter de geler l'interface utilisateur.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge administrer">Administrer - AC23.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Développement d'une couche communicante robuste avec gestion de file d'attente de messages.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - AC24.03</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">Le module de statistiques traite et restitue visuellement les données sous forme de graphiques de synthèse dynamiques.</p></div>
+                                <div class="comp-badge-row"><span class="comp-badge gerer">Gérer - CE4.01</span><p style="font-size:0.8rem; margin:0.2rem 0 0 0;">L'hébergement interne des formulaires de données garantit une conformité totale au RGPD pour la protection des mineurs.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Voir les compétences liées</button>
                 </div>
             </div>
 
-            <!-- CARD RETOUR : AXES DE PROGRESSION -->
-            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-blue-d); background: var(--bg-card); border-radius: 8px;">
-                <div>
-                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
-                        <div class="comp-icon" style="background:var(--accent-blue); color:var(--accent-blue-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                        <h3 style="margin: 0; font-size: 1.2rem;">Perspectives : Mes axes de progression</h3>
-                    </div>
 
-                    <div style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; display: flex; flex-direction: column; gap: 0.9rem;">
-                        <p style="margin: 0;">
-                            <strong>Anticipation de la charge :</strong> Pour mes futurs projets, je souhaite intégrer les problématiques de forte volumétrie de données dès le début de la base de données pour ne pas me faire surprendre.
-                        </p>
-                        <p style="margin: 0;">
-                            <strong>Estimation des délais :</strong> L'expérience du terrain m'a montré qu'il est indispensable de prévoir des marges de sécurité réalistes pour absorber les imprévus d'intégration comme les différentes missions que l'on a pu me rajouter à la suite des réunions.
-                        </p>
-                        <p style="margin: 0;">
-                            <strong>Déploiement serveur :</strong> La gestion des migrations de bases de données sur un serveur réel reste un domaine technique que je dois continuer d'explorer pour gagner en confiance.
-                        </p>
+            <!-- ═══════════════════ GRILLE DES BILANS (2 COLONNES, 1 LIGNE) ═══════════════════ -->
+            <div class="bilan-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; items: start; border-top: 2px dashed var(--border); padding-top: 2.5rem;">
+
+                <!-- CARD : APPORTS -->
+                <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top:4px solid var(--accent-green-d); height: fit-content;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:.8rem; margin-bottom:1.2rem;">
+                            <div style="background:var(--accent-green); color:var(--accent-green-d); width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:6px;"><i class="fa-solid fa-star"></i></div>
+                            <h3 style="margin:0; font-size:1.2rem;">Bilan : Ce que le stage m'a apporté</h3>
+                        </div>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="font-size:.88rem; color:var(--muted); line-height:1.6; display:flex; flex-direction:column; gap:1rem; padding-bottom: 0.5rem;">
+                                <div>
+                                    <strong>Réaliser :</strong> Développer seul une plateforme Symfony complète m'a permis de développer mes compétences, mon autonomie ainsi que l'architecture logiciel (MVC).
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill solide">Bonne solide</span></div>
+                                </div>
+                                <div>
+                                    <strong>Optimiser :</strong> Résoudre les fuites de mémoire et concevoir l'algorithme d'affectation m'a appris à choisir de meilleures structures de données.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill solide">Bonne maîtrise</span></div>
+                                </div>
+                                <div>
+                                    <strong>Administrer :</strong> L'implémentation de la sécurité et du traitement asynchrone m'a sensibilisé à la masse de données et des flux.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill solide">Assez Bonne Maîtrise</span></div>
+                                </div>
+                                <div>
+                                    <strong>Gérer les données :</strong> La modélisation de zéro et la restitution de statistiques en temps réel.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill excellent">Bonne maîtrise</span></div>
+                                </div>
+                                <div>
+                                    <strong>Conduire &amp; Collaborer :</strong> Le suivi Agile (Notion, Gantt) et la vulgarisation technique face aux bénévoles ont forgé ma posture professionnelle.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill solide">Bonne maîtrise</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Consulter le bilan détaillé</button>
                 </div>
-                <div class="comp-statut-qualitatif" style="font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 0.8rem; color: var(--accent-blue-d); margin-top: 1.5rem;">
-                    Statut : Feuille de route pour mon futur profil d'ingénieur
+
+                <!-- CARD : AXES DE PROGRESSION -->
+                <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border-top:4px solid var(--accent-blue-d); height: fit-content;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:.8rem; margin-bottom:1.2rem;">
+                            <div style="background:var(--accent-blue); color:var(--accent-blue-d); width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:6px;"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <h3 style="margin:0; font-size:1.2rem;">Perspectives : Mes axes de progression</h3>
+                        </div>
+
+                        <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="font-size:.88rem; color:var(--muted); line-height:1.6; display:flex; flex-direction:column; gap:1rem; padding-bottom: 0.5rem;">
+                                <div>
+                                    <strong>Anticipation de la charge (Optimiser) :</strong> Anticiper et intégrer plus tôt les grandes données à l'aide notamment des fixtures symfony.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill progres">À consolider : AC32.01</span></div>
+                                </div>
+                                <div>
+                                    <strong>Estimation des délais (Conduire) :</strong> Prévoir d'avantage de marges de sécurité face aux imprévus comme le rajout de fonctionnalités ou les erreurs potentielles.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill progres">À approfondir : AC25.04</span></div>
+                                </div>
+                                <div>
+                                    <strong>Déploiement (Administrer) :</strong> Pratiquer davantage les migrations de structures sur serveur réel et penser plus rapidement aux masses de données.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill progres">À développer : CE3.04</span></div>
+                                </div>
+                                <div>
+                                    <strong>Communication métier (Collaborer) :</strong> Continuer d'améliorer ma vulgarisation auprès des personnes non techniques.
+                                    <div style="margin-top:.2rem;"><span class="niveau-pill progres">À perfectionner : AC26.03</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCard(this)" style="margin-top: 1rem; width: 100%; padding: 0.5rem; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; cursor: pointer; font-weight: 500;">Consulter les perspectives</button>
                 </div>
+
             </div>
-
         </div>
     </div>
-</div>
 
 <!-- ═══════════════════ REFERENTIEL BUT ═══════════════════ -->
 <section class="section-wrap alt" id="comp-but">
@@ -1071,7 +1254,7 @@
 </div>
 
 <footer>
-    <p>© 2026 Kenzo LIERLEY · Portfolio de compétences BUT Informatique</p>
+    <p>© 2026 Kenzo LIERLEY - Portfolio de compétences BUT Informatique</p>
 </footer>
 
 <script>
@@ -1178,6 +1361,23 @@
         });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
+
+    <!-- ═══════════════════ SCRIPT D'ACCORDÉON INDÉPENDANT ═══════════════════ -->
+        function toggleCard(button) {
+        const card = button.closest('div[style*="flex-direction: column"]');
+        const content = card.querySelector('.collapsible-content');
+
+        if (content.style.maxHeight === '0px' || !content.style.maxHeight) {
+        // Calcule la hauteur réelle du contenu interne de CETTE carte
+        content.style.maxHeight = content.scrollHeight + 'px';
+        button.textContent = 'Fermer les détails';
+        button.style.background = 'rgba(0,0,0,0.03)';
+    } else {
+        content.style.maxHeight = '0px';
+        button.textContent = button.getAttribute('onclick').includes('Bilan') || card.querySelector('h3') ? 'Consulter les détails' : 'Voir les compétences liées';
+        button.style.background = 'none';
+    }
+    }
 </script>
 
 </body>
