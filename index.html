@@ -417,12 +417,12 @@
     <div class="inner">
         <div class="section-label">Profil</div>
         <h2 class="section-title">Présentation Professionnelle</h2>
-        <p class="section-sub">Développeur informatique en formation, spécialisé dans la réalisation d'applications web et logicielles fiables.</p>
+        <p class="section-sub">Développeur informatique en formation, spécialisé dans la réalisation d'applications web et logicielles.</p>
 
         <div class="about-card" style="margin-bottom: 2.5rem;">
             <h3><i class="fa-solid fa-user-tie" style="color:var(--accent-purple-d)"></i> Profil</h3>
             <p style="font-size: 0.95rem; color: var(--text); line-height: 1.7;">
-                Futur étudiant en 3e année de BUT Informatique (Parcours <strong>Réalisation d'Applications</strong>), je centre mon approche sur la conception d'architectures logicielles structurées et performantes. Fort d'une expérience de <a href="#stage" style="color: var(--accent-purple-d); cursor: pointer;">stage en autonomie complète sur la refonte globale du site "À la découverte des professions"</a> (PHP 8 / Symfony 8 / Tailwind CSS / Twig), j'allie rigueur et technique. Je sais m'adapter rapidement aux exigences de production d'une équipe technique.
+                Futur étudiant en 3e année de BUT Informatique (Parcours <strong>Réalisation d'Applications</strong>), je centre mon approche sur la conception d'architectures logicielles structurées et performantes. Fort d'une expérience de <a href="#stage" style="color: var(--accent-purple-d); cursor: pointer;">stage en autonomie complète sur la refonte globale du site "À la découverte des professions"</a> (PHP 8 / Symfony 8 / Tailwind CSS / Twig), j'allie rigueur, technique et communication. Je sais m'adapter rapidement aux exigences de production d'une équipe technique ainsi qu'aux besoins clients.
             </p>
         </div>
 
@@ -436,7 +436,9 @@
                     <h3 style="font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted);">Liens professionnels</h3>
                     <a href="https://www.linkedin.com/in/kenzo-lierley-31b839321" target="_blank" class="profile-link"><i class="fa-brands fa-linkedin" style="color:#0077B5"></i> LinkedIn</a>
                     <a href="https://github.com/LierleyKenzo" target="_blank" class="profile-link"><i class="fa-brands fa-github"></i> GitHub</a>
-                    <a download="" href="src/assets/files/CV_KenzoLierley.pdf" class="profile-link"><i class="fa-solid fa-file" style="color:var(--accent-orange-d)"></i> Consulter mon CV</a>
+                    <a href="./src/assets/files/CV_KenzoLierley.pdf" download="CV_KenzoLierley.pdf" class="profile-link">
+                        <i class="fa-solid fa-file" style="color:var(--accent-orange-d)"></i> Consulter mon CV
+                    </a>
                 </div>
             </div>
 
@@ -448,7 +450,7 @@
                             <div class="parcours-item">
                                 <div class="parcours-icon"><img id="logoIUT" src="src/assets/images/logoIUT.png" alt="Logo IUT"></div>
                                 <div>
-                                    <strong>BUT Informatique — IUT Lyon 1</strong>
+                                    <strong>BUT Informatique - IUT Lyon 1</strong>
                                     2024 → 2027 · Parcours Réalisation d'Applications.
                                 </div>
                             </div>
@@ -622,7 +624,7 @@
                             <span class="tag" style="background:var(--accent-pink); color:var(--accent-pink-d)">Réseau &amp; Système</span>
                             <span class="tag" style="background:var(--accent-purple); color:var(--accent-purple-d)">SAÉ Majeure S3-S4</span>
                         </div>
-                        <h3 class="projet-title" style="font-size: 1.5rem; margin: 0.5rem 0;">Catzmess — Jeu de plateforme Multijoueur</h3>
+                        <h3 class="projet-title" style="font-size: 1.5rem; margin: 0.5rem 0;">Catzmess - Jeu de plateforme Multijoueur</h3>
                         <p class="projet-desc">Architecture logicielle complète d'un jeu de plateforme multijoueur synchrone en ligne, impliquant le développement d'un serveur dédié et la gestion des états de connexion en temps réel.</p>
                     </div>
                     <div>
@@ -667,14 +669,34 @@
                         </div>
 
                         <div>
-                            <div class="exp-section-title">Trailer du Projet</div>
-                            <div class="video-container" id="trailerContainer" style="background: #111; border-radius: 8px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; border: 1px solid var(--border); overflow: hidden; position: relative; cursor: pointer;" onclick="loadTrailer()">
+                            <div class="exp-section-title" style="margin-bottom: 1rem;">Trailer du Projet</div>
 
-                                <div id="trailerPreview" style="text-align: center; z-index: 2;">
-                                    <i class="fa-solid fa-circle-play" style="font-size: 3rem; color: var(--bg-alt); margin-bottom: 0.5rem; transition: transform 0.2s;"></i>
-                                </div>
+                            <!-- Conteneur responsive (ratio 16:9 cinématographique) -->
+                            <div class="video-container" style="
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;">
 
-                                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('src/assets/images/catzmess.png') center/cover no-repeat; opacity: 0.3; z-index: 1;"></div>
+                                <iframe
+                                        loading="lazy"
+                                        src="https://www.youtube.com/embed/ANSgLBgqd_4?rel=0&showinfo=0"
+                                        style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        "
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                </iframe>
                             </div>
 
                             <div class="exp-section-title">Évolution</div>
@@ -697,8 +719,8 @@
 <div class="section-wrap" id="stage">
     <div class="inner">
         <div class="section-label">Expérience Professionnelle</div>
-        <h2 class="section-title">Stage BUT 2 — Développeur Web</h2>
-        <p class="section-sub">12 semaines de développement en autonomie complète au sein de l'association « À la découverte des professions » — Refonte intégrale d'une plateforme Symfony.</p>
+        <h2 class="section-title">Stage BUT 2 - Développeur Web</h2>
+        <p class="section-sub">12 semaines de développement en autonomie complète au sein de l'association « À la découverte des professions » - Refonte intégrale d'une plateforme Symfony.</p>
 
         <div class="stage-enterprise">
             <div class="stage-logo-box">
@@ -706,7 +728,7 @@
             </div>
             <div class="stage-info" style="flex:1;">
                 <div class="stage-period"><i class="fa-regular fa-calendar"></i>&nbsp; 07 avril → 26 juin 2026 · 12 semaines · Lyon</div>
-                <h3 style="margin:.3rem 0 .6rem;">À la découverte des professions <span style="font-size:.85rem;font-weight:500;color:var(--muted);">— Association Rotary, 33 Cours Albert Thomas, 69003 Lyon</span></h3>
+                <h3 style="margin:.3rem 0 .6rem;">À la découverte des professions <span style="font-size:.85rem;font-weight:500;color:var(--muted);">- Association Rotary, 33 Cours Albert Thomas, 69003 Lyon</span></h3>
                 <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:.8rem;">
                     Association fondée en 1969 par le Rotary Club de Lyon regroupant <strong>21 clubs Rotary</strong> de la métropole. Elle organise chaque année une journée d'orientation réunissant <strong>plus de 2 000 jeunes</strong>, 180 intervenants professionnels et 60 ateliers thématiques. Hébergé dans les locaux de l'entreprise <em>Onyl Rocks</em> (entreprise du maître de stage), j'ai travaillé en <strong>totale autonomie</strong> sous la supervision d'Alexis MONNET, CTO et Lead Developer PHP/Symfony.
                 </p>
@@ -721,26 +743,36 @@
                         <i class="fa-solid fa-chalkboard-user" style="color:var(--accent-green-d)"></i> Tuteur IUT : Xavier MERRHEIM
                     </span>
                 </div>
+                <div style="padding-top: 16px;">
+                    <div style="display:flex;flex-wrap:wrap;gap:.6rem;">
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" style="width:18px;height:18px;"> PHP 8</span>
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg" style="width:18px;height:18px;"> Symfony 8</span>
+                        <span class="interest-chip">Twig</span>
+                        <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" style="width:18px;height:18px;"> Tailwind CSS</span>
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:18px;height:18px;"> JavaScript</span>
+                        <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" style="width:18px;height:18px;"> SQL / MySQL</span>
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/doctrine/doctrine-original.svg" style="width:18px;height:18px;"> Doctrine ORM</span>
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="width:18px;height:18px;"> Git</span>
+                        <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" style="width:18px;height:18px;"> Notion</span>
+                        <span class="interest-chip">Stitch (IA Design)</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="about-card" style="margin-bottom:1.5rem;">
             <h3 style="font-size:1rem;margin-bottom:.8rem;">Contexte du projet &amp; enjeux</h3>
             <p style="font-size:.88rem;color:var(--muted);line-height:1.7;">
-                L'association souffrait d'un <strong>fort fractionnement de ses données</strong> : inscriptions sur un site obsolète, logistique via des fichiers Excel, mailings lancés manuellement en ligne de commande sur le serveur. Mon objectif était de remplacer l'ensemble de ces outils par <strong>une plateforme unique et centralisée</strong> construite en PHP 8 / Symfony 8 / Tailwind CSS / Twig. J'ai été le seul développeur sur le projet, avec une gestion autonome de toutes les phases — analyse, conception, développement, optimisation — et une communication quotidienne avec le maître de stage (rapports écrits sur Teams, réunions de suivi avec les bénévoles de l'association).
+                L'association souffrait d'un <strong>fort fractionnement de ses données</strong> : inscriptions sur un site obsolète, logistique via des fichiers Excel, mailings lancés manuellement en ligne de commande sur le serveur. Mon objectif était de remplacer l'ensemble de ces outils par <strong>une plateforme unique et centralisée</strong> construite en PHP 8 / Symfony 8 / Tailwind CSS / Twig. J'ai été le seul développeur sur le projet, avec une gestion autonome de toutes les phases - analyse, conception, développement, optimisation - et une communication quotidienne avec le maître de stage (rapports écrits sur Teams, réunions de suivi avec les bénévoles de l'association).
             </p>
-        </div>
-
-        <div class="about-card" style="margin-bottom:2rem;">
-            <h3 style="font-size:1rem;margin-bottom:1rem;">Interface et plateforme avant le projet de refonte</h3>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem; align-items: center; justify-content: center; padding-top: 20px;">
                 <div style="text-align:center;">
-                    <img src="src/assets/images/accueilExistant.png" alt="Ancienne page d'accueil" style="width:100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
+                    <img src="src/assets/images/accueilExistant.png" alt="Ancienne page d'accueil" class="" style="width:100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
                     <p style="font-size:.8rem; color:var(--muted); margin-top:.4rem;">Ancienne interface de la page d'accueil</p>
                 </div>
                 <div style="text-align:center;">
-                    <img src="src/assets/images/catalogueExistant.png" alt="Ancien catalogue d'ateliers" style="width:100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
-                    <p style="font-size:.8rem; color:var(--muted); margin-top:.4rem;">Ancienne structure textuelle du catalogue d'ateliers</p>
+                    <img src="src/assets/images/catalogueExistant.png" alt="Ancien catalogue d'ateliers" style="width: 100%; border-radius:6px; border:1px solid var(--border); max-height:320px; object-fit:contain; background:#f8f9fa;">
+                    <p style="font-size:.8rem; color:var(--muted); margin-top:.4rem;">Ancien catalogue d'ateliers</p>
                 </div>
             </div>
         </div>
@@ -800,49 +832,71 @@
                 </div>
                 <div class="mission-body">
                     <h4>Système d'e-mails &amp; statistiques</h4>
-                    <p>Intégration de <strong>Symfony Messenger</strong> pour l'envoi asynchrone de mails groupés (2 000+ destinataires sans blocage de l'interface). Templates d'e-mails personnalisables avec variables dynamiques (nom, prénom, planning…). Module de statistiques générant des <strong>graphiques en temps réel</strong> depuis les questionnaires — conformité RGPD garantie (données hébergées en interne).</p>
+                    <p>Intégration de <strong>Symfony Messenger</strong> pour l'envoi asynchrone de mails groupés (2 000+ destinataires sans blocage de l'interface). Templates d'e-mails personnalisables avec variables dynamiques (nom, prénom, planning…). Module de statistiques générant des <strong>graphiques en temps réel</strong> depuis les questionnaires - conformité RGPD garantie (données hébergées en interne).</p>
                 </div>
             </div>
 
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
-            <div class="about-card">
-                <h3 style="font-size:.95rem;margin-bottom:.8rem;"><i class="fa-solid fa-star" style="color:var(--accent-yellow-d)"></i> Points forts identifiés</h3>
-                <div class="recherche-list">
-                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Autonomie complète sur un projet d'envergure réelle</div>
-                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Communication quotidienne structurée (rapports Teams)</div>
-                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Adaptation aux besoins d'utilisateurs non techniques</div>
-                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Participation active aux réunions de suivi associatives</div>
-                    <div class="recherche-item"><i class="fa-solid fa-check" style="color:var(--accent-green-d)"></i> Livraison de l'intégralité des fonctionnalités prévues</div>
-                </div>
-            </div>
-            <div class="about-card">
-                <h3 style="font-size:.95rem;margin-bottom:.8rem;"><i class="fa-solid fa-arrow-trend-up" style="color:var(--accent-blue-d)"></i> Axes de progression identifiés</h3>
-                <div class="recherche-list">
-                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Anticiper la charge sur les volumétries élevées dès la conception</div>
-                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Estimer les délais avec des marges de sécurité réalistes</div>
-                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Tester la sécurité systématiquement après chaque fonctionnalité</div>
-                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Approfondir Git en conditions de production réelle</div>
-                    <div class="recherche-item"><i class="fa-solid fa-arrow-right" style="color:var(--accent-orange-d)"></i> Gérer la mise en production et la migration vers le serveur</div>
-                </div>
-            </div>
-        </div>
+        <!-- Nouvelle ligne dédiée pour afficher les deux bilans côte à côte -->
+        <div class="bilan-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
 
-        <div class="about-card" style="margin-bottom:0;">
-            <h3 style="font-size:.95rem;margin-bottom:1rem;"><i class="fa-solid fa-layer-group" style="color:var(--accent-purple-d)"></i> Stack technologique utilisée pendant le stage</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:.6rem;">
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" style="width:18px;height:18px;"> PHP 8</span>
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg" style="width:18px;height:18px;"> Symfony 8</span>
-                <span class="interest-chip">Twig</span>
-                <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" style="width:18px;height:18px;"> Tailwind CSS</span>
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:18px;height:18px;"> JavaScript</span>
-                <span class="interest-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" style="width:18px;height:18px;"> SQL / MySQL</span>
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/doctrine/doctrine-original.svg" style="width:18px;height:18px;"> Doctrine ORM</span>
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="width:18px;height:18px;"> Git</span>
-                <span class="interest-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" style="width:18px;height:18px;"> Notion</span>
-                <span class="interest-chip">Stitch (IA Design)</span>
+            <!-- CARD RETOUR : COMPÉTENCES CONSOLIDÉES -->
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-green-d); background: var(--bg-card); border-radius: 8px;">
+                <div>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
+                        <div class="comp-icon" style="background:var(--accent-green); color:var(--accent-green-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-star"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Bilan : Ce que le stage m'a apporté</h3>
+                    </div>
+
+                    <div style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; display: flex; flex-direction: column; gap: 0.9rem;">
+                        <p style="margin: 0;">
+                            <strong>Autonomie technique :</strong> Ce projet d'envergure m'a prouvé que j'étais capable de mener un développement complet de bout en bout, en prenant mes propres décisions architecturales.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Rigueur et suivi :</strong> L'instauration de rapports quotidiens sur Teams m'a forcé à structurer mon travail et a offert une visibilité totale sur l'avancement des livrables.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Posture professionnelle :</strong> Collaborer avec des interlocuteurs associatifs m'a appris à traduire des contraintes techniques complexes en choix fonctionnels simples et compréhensibles.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Respect des engagements :</strong> Malgré les défis logistiques, l'intégralité des fonctionnalités prévues au cahier des charges a été développée, testée et livrée.
+                        </p>
+                    </div>
+                </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 0.8rem; color: var(--accent-green-d); margin-top: 1.5rem;">
+                    Statut : Objectifs de stage pleinement atteints
+                </div>
             </div>
+
+            <!-- CARD RETOUR : AXES DE PROGRESSION -->
+            <div class="comp-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; border-top: 4px solid var(--accent-blue-d); background: var(--bg-card); border-radius: 8px;">
+                <div>
+                    <div class="comp-header" style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
+                        <div class="comp-icon" style="background:var(--accent-blue); color:var(--accent-blue-d); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px;"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <h3 style="margin: 0; font-size: 1.2rem;">Perspectives : Mes axes de progression</h3>
+                    </div>
+
+                    <div style="font-size: 0.88rem; color: var(--muted); line-height: 1.5; display: flex; flex-direction: column; gap: 0.9rem;">
+                        <p style="margin: 0;">
+                            <strong>Anticipation de la charge :</strong> Pour mes futurs projets, je souhaite intégrer les problématiques de forte volumétrie de données dès les premières ébauches de la base de données.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Estimation des délais :</strong> L'expérience du terrain m'a montré qu'il est indispensable de prévoir des marges de sécurité réalistes pour absorber les imprévus d'intégration.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Culture DevOps et Sécurité :</strong> J'ambitionne de systématiser les audits de vulnérabilité et de fluidifier l'utilisation de Git lors des phases critiques de mise en production.
+                        </p>
+                        <p style="margin: 0;">
+                            <strong>Déploiement serveur :</strong> La gestion des migrations de bases de données sur un serveur réel reste un domaine technique que je dois continuer d'explorer pour gagner en confiance.
+                        </p>
+                    </div>
+                </div>
+                <div class="comp-statut-qualitatif" style="font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 0.8rem; color: var(--accent-blue-d); margin-top: 1.5rem;">
+                    Statut : Feuille de route pour mon futur profil d'ingénieur
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -1125,29 +1179,6 @@
         });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
-
-    function loadTrailer() {
-        const container = document.getElementById('trailerContainer');
-
-        // On vérifie si l'iframe n'est pas déjà chargée pour éviter les doublons
-        if (!container.querySelector('iframe')) {
-            // Source de ta vidéo
-            const videoSrc = "src/assets/video/SAE_2026_CATZMESS_BP_GM_KL_WB_CJ.mp4";
-
-            // On génère l'iframe avec l'autoplay activé pour que la vidéo se lance immédiatement après le clic
-            container.innerHTML = `
-            <iframe src="${videoSrc}?autoplay=1"
-                    style="width: 100%; height: 100%; border: none;"
-                    frameborder="0"
-                    allow="autoplay; fullscreen"
-                    allowfullscreen>
-            </iframe>`;
-
-            // On retire le curseur pointer et l'effet de clic
-            container.style.cursor = 'default';
-            container.removeAttribute('onclick');
-        }
-    }
 </script>
 
 </body>
